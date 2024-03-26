@@ -19,10 +19,10 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.auto import Auto
+from ..models.grouping_any_of import GroupingAnyOf
 
 Grouping = Union[
-    Annotated[Auto, ""],
+    Annotated[GroupingAnyOf, ""],
     Annotated[str, "Time interval with duration unit."],
     Annotated[
         str,

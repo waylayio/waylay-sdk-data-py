@@ -1,10 +1,8 @@
 pyproject.toml
 src/waylay/services/data/models/__init__.py
 src/waylay/services/data/models/aggregate.py
-src/waylay/services/data/models/auto.py
 src/waylay/services/data/models/delete_messages200_response.py
 src/waylay/services/data/models/delete_series_from_parameter.py
-src/waylay/services/data/models/empty.py
 src/waylay/services/data/models/error_response.py
 src/waylay/services/data/models/event.py
 src/waylay/services/data/models/event_timestamp.py
@@ -14,6 +12,7 @@ src/waylay/services/data/models/get_metric_series_from_parameter.py
 src/waylay/services/data/models/get_series200_response_inner.py
 src/waylay/services/data/models/get_series200_response_inner_latest.py
 src/waylay/services/data/models/grouping.py
+src/waylay/services/data/models/grouping_any_of.py
 src/waylay/services/data/models/hal_link.py
 src/waylay/services/data/models/latest_measurement.py
 src/waylay/services/data/models/message_query.py
@@ -28,6 +27,7 @@ src/waylay/services/data/models/post_series_for_resource_request.py
 src/waylay/services/data/models/post_series_request.py
 src/waylay/services/data/models/publish_event_response.py
 src/waylay/services/data/models/publish_event_response_content.py
+src/waylay/services/data/models/publish_event_response_content_any_of.py
 src/waylay/services/data/models/publish_resource_event_response.py
 src/waylay/services/data/models/publish_resource_event_response_content.py
 src/waylay/services/data/models/py.typed

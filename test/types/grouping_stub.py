@@ -30,7 +30,7 @@ grouping_model_schema = json.loads(
     "url" : "https://docs.waylay.io/#/api/broker/?id=grouping"
   },
   "anyOf" : [ {
-    "$ref" : "#/components/schemas/auto"
+    "$ref" : "#/components/schemas/Grouping_anyOf"
   }, {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {

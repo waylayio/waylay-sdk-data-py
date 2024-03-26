@@ -74,10 +74,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Aggregate](docs/Aggregate.md)
- - [Auto](docs/Auto.md)
  - [DeleteMessages200Response](docs/DeleteMessages200Response.md)
  - [DeleteSeriesFromParameter](docs/DeleteSeriesFromParameter.md)
- - [Empty](docs/Empty.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [Event](docs/Event.md)
  - [EventTimestamp](docs/EventTimestamp.md)
@@ -87,6 +85,7 @@ Class | Method | HTTP request | Description
  - [GetSeries200ResponseInner](docs/GetSeries200ResponseInner.md)
  - [GetSeries200ResponseInnerLatest](docs/GetSeries200ResponseInnerLatest.md)
  - [Grouping](docs/Grouping.md)
+ - [GroupingAnyOf](docs/GroupingAnyOf.md)
  - [HalLink](docs/HalLink.md)
  - [LatestMeasurement](docs/LatestMeasurement.md)
  - [MessageQuery](docs/MessageQuery.md)
@@ -100,6 +99,7 @@ Class | Method | HTTP request | Description
  - [PostSeriesRequest](docs/PostSeriesRequest.md)
  - [PublishEventResponse](docs/PublishEventResponse.md)
  - [PublishEventResponseContent](docs/PublishEventResponseContent.md)
+ - [PublishEventResponseContentAnyOf](docs/PublishEventResponseContentAnyOf.md)
  - [PublishResourceEventResponse](docs/PublishResourceEventResponse.md)
  - [PublishResourceEventResponseContent](docs/PublishResourceEventResponseContent.md)
  - [QueryTimeSeries200Response](docs/QueryTimeSeries200Response.md)

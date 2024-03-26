@@ -14,8 +14,8 @@ from __future__ import annotations
 from enum import Enum
 
 
-class Auto(str, Enum):
-    """Auto."""
+class GroupingAnyOf(str, Enum):
+    """GroupingAnyOf."""
 
     AUTO = "auto"
 

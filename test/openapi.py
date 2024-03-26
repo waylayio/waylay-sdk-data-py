@@ -44,17 +44,6 @@ _aggregate_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"Aggregate": _aggregate_model_schema})
 
-_auto_model_schema = json.loads(
-    r"""{
-  "title" : "auto",
-  "type" : "string",
-  "enum" : [ "auto" ]
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({"auto": _auto_model_schema})
-
 _delete_messages_200_response_model_schema = json.loads(
     r"""{
   "required" : [ "message" ],
@@ -86,18 +75,6 @@ _delete_series_from_parameter_model_schema = json.loads(
 MODEL_DEFINITIONS.update({
     "deleteSeries_from_parameter": _delete_series_from_parameter_model_schema
 })
-
-_empty_model_schema = json.loads(
-    r"""{
-  "title" : "Empty",
-  "type" : "object",
-  "description" : "Marks that multiple events where published",
-  "enum" : [ { } ]
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({"Empty": _empty_model_schema})
 
 _error_response_model_schema = json.loads(
     r"""{
@@ -252,7 +229,7 @@ _grouping_model_schema = json.loads(
     "url" : "https://docs.waylay.io/#/api/broker/?id=grouping"
   },
   "anyOf" : [ {
-    "$ref" : "#/components/schemas/auto"
+    "$ref" : "#/components/schemas/Grouping_anyOf"
   }, {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {
@@ -263,6 +240,17 @@ _grouping_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({"Grouping": _grouping_model_schema})
+
+_grouping_any_of_model_schema = json.loads(
+    r"""{
+  "title" : "Grouping_anyOf",
+  "type" : "string",
+  "enum" : [ "auto" ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"Grouping_anyOf": _grouping_any_of_model_schema})
 
 _hal_link_model_schema = json.loads(
     r"""{
@@ -500,7 +488,7 @@ _publish_event_response_content_model_schema = json.loads(
   }, {
     "$ref" : "#/components/schemas/TimestampedResourceEvents"
   }, {
-    "$ref" : "#/components/schemas/Empty"
+    "$ref" : "#/components/schemas/PublishEventResponse_content_anyOf"
   } ]
 }
 """,
@@ -508,6 +496,19 @@ _publish_event_response_content_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({
     "PublishEventResponse_content": _publish_event_response_content_model_schema
+})
+
+_publish_event_response_content_any_of_model_schema = json.loads(
+    r"""{
+  "type" : "object",
+  "description" : "Marks that multiple events where published",
+  "enum" : [ { } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({
+    "PublishEventResponse_content_anyOf": _publish_event_response_content_any_of_model_schema
 })
 
 _publish_resource_event_response_model_schema = json.loads(
@@ -535,7 +536,7 @@ _publish_resource_event_response_content_model_schema = json.loads(
   "anyOf" : [ {
     "$ref" : "#/components/schemas/TimestampedEvent"
   }, {
-    "$ref" : "#/components/schemas/Empty"
+    "$ref" : "#/components/schemas/PublishEventResponse_content_anyOf"
   } ]
 }
 """,

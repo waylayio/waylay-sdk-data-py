@@ -16,10 +16,8 @@ __version__ = "2.14.0-0"
 
 # import models into model package
 from .aggregate import Aggregate
-from .auto import Auto
 from .delete_messages200_response import DeleteMessages200Response
 from .delete_series_from_parameter import DeleteSeriesFromParameter
-from .empty import Empty
 from .error_response import ErrorResponse
 from .event import Event
 from .event_timestamp import EventTimestamp
@@ -33,6 +31,7 @@ from .get_metric_series_from_parameter import GetMetricSeriesFromParameter
 from .get_series200_response_inner import GetSeries200ResponseInner
 from .get_series200_response_inner_latest import GetSeries200ResponseInnerLatest
 from .grouping import Grouping
+from .grouping_any_of import GroupingAnyOf
 from .hal_link import HalLink
 from .latest_measurement import LatestMeasurement
 from .message_query import MessageQuery
@@ -46,6 +45,7 @@ from .post_series_for_resource_request import PostSeriesForResourceRequest
 from .post_series_request import PostSeriesRequest
 from .publish_event_response import PublishEventResponse
 from .publish_event_response_content import PublishEventResponseContent
+from .publish_event_response_content_any_of import PublishEventResponseContentAnyOf
 from .publish_resource_event_response import PublishResourceEventResponse
 from .publish_resource_event_response_content import PublishResourceEventResponseContent
 from .query_time_series200_response import QueryTimeSeries200Response
@@ -73,10 +73,8 @@ from .version_response import VersionResponse
 __all__ = [
     "__version__",
     "Aggregate",
-    "Auto",
     "DeleteMessages200Response",
     "DeleteSeriesFromParameter",
-    "Empty",
     "ErrorResponse",
     "Event",
     "EventTimestamp",
@@ -86,6 +84,7 @@ __all__ = [
     "GetSeries200ResponseInner",
     "GetSeries200ResponseInnerLatest",
     "Grouping",
+    "GroupingAnyOf",
     "HalLink",
     "LatestMeasurement",
     "MessageQuery",
@@ -99,6 +98,7 @@ __all__ = [
     "PostSeriesRequest",
     "PublishEventResponse",
     "PublishEventResponseContent",
+    "PublishEventResponseContentAnyOf",
     "PublishResourceEventResponse",
     "PublishResourceEventResponseContent",
     "QueryTimeSeries200Response",

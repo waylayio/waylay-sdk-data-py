@@ -19,10 +19,12 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.empty import Empty
+from ..models.publish_event_response_content_any_of import (
+    PublishEventResponseContentAnyOf,
+)
 from ..models.timestamped_event import TimestampedEvent
 
 PublishResourceEventResponseContent = Union[
-    Annotated[TimestampedEvent, ""], Annotated[Empty, ""]
+    Annotated[TimestampedEvent, ""], Annotated[PublishEventResponseContentAnyOf, ""]
 ]
 """PublishResourceEventResponseContent."""

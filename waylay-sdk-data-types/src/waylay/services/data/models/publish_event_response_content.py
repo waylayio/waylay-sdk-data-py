@@ -20,7 +20,9 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.empty import Empty
+from ..models.publish_event_response_content_any_of import (
+    PublishEventResponseContentAnyOf,
+)
 from ..models.timestamped_resource_event import TimestampedResourceEvent
 
 PublishEventResponseContent = Union[
@@ -29,6 +31,6 @@ PublishEventResponseContent = Union[
         List[TimestampedResourceEvent],
         "Array of measurement objects with resource identifier and timestamp.",
     ],
-    Annotated[Empty, ""],
+    Annotated[PublishEventResponseContentAnyOf, ""],
 ]
 """PublishEventResponseContent."""

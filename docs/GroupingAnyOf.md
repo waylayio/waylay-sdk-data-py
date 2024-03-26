@@ -1,4 +1,4 @@
-# Auto
+# GroupingAnyOf
 
 
 ## Properties
