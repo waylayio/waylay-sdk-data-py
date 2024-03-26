@@ -32,7 +32,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from data.models.timestamped_resource_event import TimestampedResourceEvent
 try:
     # Stream Events For Resource
@@ -45,29 +45,5 @@ try:
 except ApiError as e:
     print("Exception when calling data.events.stream_events: %s\n" % e)
 ```
-
-
-## Documentation for API Endpoints
-
-All URIs are relative to *https://api.waylay.io*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*EventsApi* | [**post_series**](docs/EventsApi.md#post_series) | **POST** /data/v1/events | Post Events
-*EventsApi* | [**post_series_for_resource**](docs/EventsApi.md#post_series_for_resource) | **POST** /data/v1/events/{resourceId} | Post Events For Resource
-*EventsApi* | [**remove**](docs/EventsApi.md#remove) | **DELETE** /data/v1/{resourceId} | Remove Data
-*EventsApi* | [**stream_events**](docs/EventsApi.md#stream_events) | **GET** /data/v1/events/{resourceId} | Stream Events For Resource
-*MessagesApi* | [**delete_messages**](docs/MessagesApi.md#delete_messages) | **DELETE** /data/v1/messages/{resourceId} | Remove Messages For Resource
-*MessagesApi* | [**get_latest_document**](docs/MessagesApi.md#get_latest_document) | **GET** /data/v1/messages/{resourceId}/current | Retrieve Latest Message
-*MessagesApi* | [**get_latest_messages**](docs/MessagesApi.md#get_latest_messages) | **GET** /data/v1/messages/{resourceId} | Retrieve Messages For Resource
-*MessagesApi* | [**query_messages**](docs/MessagesApi.md#query_messages) | **POST** /data/v1/messages/query | Query Messages
-*SeriesApi* | [**delete_series**](docs/SeriesApi.md#delete_series) | **DELETE** /data/v1/series/{resourceId} | Delete Series
-*SeriesApi* | [**get_datapoints_for_metric_raw**](docs/SeriesApi.md#get_datapoints_for_metric_raw) | **GET** /data/v1/series/{resourceId}/{metric}/raw | Get Unaggregated Values For A Series
-*SeriesApi* | [**get_last_datapoints_for_metric**](docs/SeriesApi.md#get_last_datapoints_for_metric) | **GET** /data/v1/series/{resourceId}/{metric}/last | Get Last Unaggregated Values For A Series
-*SeriesApi* | [**get_last_metric**](docs/SeriesApi.md#get_last_metric) | **GET** /data/v1/series/{resourceId}/{metric}/latest | Get Latest Value For A Series
-*SeriesApi* | [**get_metric_series**](docs/SeriesApi.md#get_metric_series) | **GET** /data/v1/series/{resourceId}/{metric} | Query Series
-*SeriesApi* | [**get_series**](docs/SeriesApi.md#get_series) | **GET** /data/v1/series/{resourceId} | Get Series Overview
-*SeriesApi* | [**query_time_series**](docs/SeriesApi.md#query_time_series) | **POST** /data/v1/series/query | Query Series Data
-*VersionApi* | [**health**](docs/VersionApi.md#health) | **GET** /data/v1/ | Version
 
 

@@ -33,7 +33,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_resource_event import TimestampedResourceEvent
 try:
     # Stream Events For Resource

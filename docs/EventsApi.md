@@ -31,7 +31,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.post_series_request import PostSeriesRequest
 from waylay.services.data.models.publish_event_response import PublishEventResponse
 try:
@@ -110,7 +110,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.post_series_for_resource_request import PostSeriesForResourceRequest
 from waylay.services.data.models.publish_resource_event_response import PublishResourceEventResponse
 try:
@@ -191,7 +191,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
 try:
     # Remove Data
@@ -267,7 +267,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
-# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
+# Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_resource_event import TimestampedResourceEvent
 try:
     # Stream Events For Resource
