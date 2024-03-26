@@ -65,9 +65,8 @@ jobs:
     name: Publish api package to PyPI
     runs-on: ubuntu-latest
     environment:
-      name: testpypi # TODO change to pypi
-      # url: https://pypi.org/p/waylay-sdk-data
-      url: https://test.pypi.org/p/waylay-sdk-data # TODO REMOVE
+      name: pypi 
+      url: https://pypi.org/p/waylay-sdk-data
 
     permissions:
       actions: read
@@ -92,7 +91,6 @@ jobs:
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        repository-url: https://test.pypi.org/legacy/ # TODO remove
         packages-dir: waylay-sdk-data/dist
 
   publish-types:
@@ -108,9 +106,8 @@ jobs:
     name: Publish types package to PyPI
     runs-on: ubuntu-latest
     environment:
-      name: testpypi # TODO change to pypi
-      # url: https://pypi.org/p/waylay-sdk-data-types
-      url: https://test.pypi.org/p/waylay-sdk-data-types # TODO REMOVE
+      name: pypi 
+      url: https://pypi.org/p/waylay-sdk-data-types
     
 
     permissions:
@@ -136,5 +133,5 @@ jobs:
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        repository-url: https://test.pypi.org/legacy/ # TODO remove
         packages-dir: waylay-sdk-data-types/dist
+        password: ${{ secrets.PYPI_TYPES_PKG_API_TOKEN }}
