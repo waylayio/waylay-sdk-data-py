@@ -31,6 +31,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
 try:
     # Remove Messages For Resource
@@ -98,6 +99,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_event import TimestampedEvent
 try:
     # Retrieve Latest Message
@@ -166,6 +168,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_event import TimestampedEvent
 try:
     # Retrieve Messages For Resource
@@ -232,6 +235,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.message_query import MessageQuery
 from waylay.services.data.models.message_query_result import MessageQueryResult
 try:

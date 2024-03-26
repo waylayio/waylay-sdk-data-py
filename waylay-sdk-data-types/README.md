@@ -4,9 +4,7 @@ Data is ingested into the platform by the Waylay Broker.
 This Python package is automatically generated based on the 
 Waylay Data OpenAPI specification (API version: 2.14.0)
 
-It consists of two sub-packages that are both plugins for the waylay-sdk package.
-- The `waylay-sdk-data` sub-package contains the Data api methods.
-- The `waylay-sdk-data-types` sub-package is an extension that contains the typed model classes for all path params, query params, body params and responses for each of the api methods in `waylay-sdk-data`.
+It is considered an extension of the waylay-sdk-data package, and it consists of the typed model classes for all path params, query params, body params and responses for each of the api methods in `waylay-sdk-data`.
 
 ## Requirements.
 This package requires Python 3.9+.
@@ -34,7 +32,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.timestamped_resource_event import TimestampedResourceEvent
+from ..models.timestamped_resource_event import TimestampedResourceEvent
 try:
     # Stream Events For Resource
     # calls `GET /data/v1/events/{resourceId}`

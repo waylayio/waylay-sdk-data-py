@@ -1,3 +1,5 @@
+LICENSE.txt
+README.md
 pyproject.toml
 src/waylay/services/data/models/__init__.py
 src/waylay/services/data/models/aggregate.py

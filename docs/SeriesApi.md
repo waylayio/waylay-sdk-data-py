@@ -35,6 +35,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
 try:
     # Delete Series
@@ -111,6 +112,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.order import Order
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
 try:
@@ -192,6 +194,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
 try:
     # Get Last Unaggregated Values For A Series
@@ -269,6 +272,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.latest_measurement import LatestMeasurement
 try:
     # Get Latest Value For A Series
@@ -341,6 +345,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.aggregate import Aggregate
 from waylay.services.data.models.order import Order
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
@@ -423,6 +428,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.get_series200_response_inner import GetSeries200ResponseInner
 try:
     # Get Series Overview
@@ -489,6 +495,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 # Intialize a waylay client instance
 waylay_client = WaylayClient.from_profile()
 
+# Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.query_time_series200_response import QueryTimeSeries200Response
 from waylay.services.data.models.query_time_series_request import QueryTimeSeriesRequest
 try:

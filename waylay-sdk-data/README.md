@@ -4,9 +4,8 @@ Data is ingested into the platform by the Waylay Broker.
 This Python package is automatically generated based on the 
 Waylay Data OpenAPI specification (API version: 2.14.0)
 
-It consists of two sub-packages that are both plugins for the waylay-sdk package.
-- The `waylay-sdk-data` sub-package contains the Data api methods.
-- The `waylay-sdk-data-types` sub-package is an extension that contains the typed model classes for all path params, query params, body params and responses for each of the api methods in `waylay-sdk-data`.
+It consists of a plugin for the waylay-sdk package, and contains the Data api methods.
+Note that the typed model classes for all path params, query params, body params and responses for each of the api methods are contained in a separate package called waylay-sdk-data-types.
 
 ## Requirements.
 This package requires Python 3.9+.
@@ -34,7 +33,7 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Model classes for responses/parameters are available only when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.timestamped_resource_event import TimestampedResourceEvent
+from data.models.timestamped_resource_event import TimestampedResourceEvent
 try:
     # Stream Events For Resource
     # calls `GET /data/v1/events/{resourceId}`
@@ -71,57 +70,4 @@ Class | Method | HTTP request | Description
 *SeriesApi* | [**query_time_series**](docs/SeriesApi.md#query_time_series) | **POST** /data/v1/series/query | Query Series Data
 *VersionApi* | [**health**](docs/VersionApi.md#health) | **GET** /data/v1/ | Version
 
-
-## Documentation For Models
-
- - [Aggregate](docs/Aggregate.md)
- - [DeleteMessages200Response](docs/DeleteMessages200Response.md)
- - [DeleteSeriesFromParameter](docs/DeleteSeriesFromParameter.md)
- - [ErrorResponse](docs/ErrorResponse.md)
- - [Event](docs/Event.md)
- - [EventTimestamp](docs/EventTimestamp.md)
- - [GetDatapointsForMetricRaw200Response](docs/GetDatapointsForMetricRaw200Response.md)
- - [GetDatapointsForMetricRaw200ResponseLinks](docs/GetDatapointsForMetricRaw200ResponseLinks.md)
- - [GetMetricSeriesFromParameter](docs/GetMetricSeriesFromParameter.md)
- - [GetSeries200ResponseInner](docs/GetSeries200ResponseInner.md)
- - [GetSeries200ResponseInnerLatest](docs/GetSeries200ResponseInnerLatest.md)
- - [Grouping](docs/Grouping.md)
- - [GroupingAnyOf](docs/GroupingAnyOf.md)
- - [HalLink](docs/HalLink.md)
- - [LatestMeasurement](docs/LatestMeasurement.md)
- - [MessageQuery](docs/MessageQuery.md)
- - [MessageQueryFrom](docs/MessageQueryFrom.md)
- - [MessageQueryResult](docs/MessageQueryResult.md)
- - [MessageQueryResultResultsInner](docs/MessageQueryResultResultsInner.md)
- - [MessageQueryUntil](docs/MessageQueryUntil.md)
- - [MessageQueryWindow](docs/MessageQueryWindow.md)
- - [Order](docs/Order.md)
- - [PostSeriesForResourceRequest](docs/PostSeriesForResourceRequest.md)
- - [PostSeriesRequest](docs/PostSeriesRequest.md)
- - [PublishEventResponse](docs/PublishEventResponse.md)
- - [PublishEventResponseContent](docs/PublishEventResponseContent.md)
- - [PublishEventResponseContentAnyOf](docs/PublishEventResponseContentAnyOf.md)
- - [PublishResourceEventResponse](docs/PublishResourceEventResponse.md)
- - [PublishResourceEventResponseContent](docs/PublishResourceEventResponseContent.md)
- - [QueryTimeSeries200Response](docs/QueryTimeSeries200Response.md)
- - [QueryTimeSeriesRequest](docs/QueryTimeSeriesRequest.md)
- - [ResourceEvent](docs/ResourceEvent.md)
- - [ScalarData](docs/ScalarData.md)
- - [SeriesKeyValueInner](docs/SeriesKeyValueInner.md)
- - [SeriesQueryRequest](docs/SeriesQueryRequest.md)
- - [SeriesQueryRequestFrom](docs/SeriesQueryRequestFrom.md)
- - [SeriesQueryRequestWindow](docs/SeriesQueryRequestWindow.md)
- - [SeriesQueryResponse](docs/SeriesQueryResponse.md)
- - [TTLDuration](docs/TTLDuration.md)
- - [TimeseriesFilter](docs/TimeseriesFilter.md)
- - [TimeseriesFilterOperator](docs/TimeseriesFilterOperator.md)
- - [TimeseriesFilterOperatorOperator](docs/TimeseriesFilterOperatorOperator.md)
- - [TimeseriesFilterValue](docs/TimeseriesFilterValue.md)
- - [TimeseriesFilterValueBounds](docs/TimeseriesFilterValueBounds.md)
- - [TimeseriesFilterValueExact](docs/TimeseriesFilterValueExact.md)
- - [TimeseriesFilterValueExactValue](docs/TimeseriesFilterValueExactValue.md)
- - [TimeseriesJsonResult](docs/TimeseriesJsonResult.md)
- - [TimestampedEvent](docs/TimestampedEvent.md)
- - [TimestampedResourceEvent](docs/TimestampedResourceEvent.md)
- - [VersionResponse](docs/VersionResponse.md)
 
