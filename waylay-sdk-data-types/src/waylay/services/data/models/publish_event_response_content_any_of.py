@@ -17,7 +17,7 @@ from pydantic import (
 from waylay.sdk.api._models import _BaseModel
 
 
-class Empty(_BaseModel):
+class PublishEventResponseContentAnyOf(_BaseModel):
     """Marks that multiple events where published."""
 
     model_config = ConfigDict(

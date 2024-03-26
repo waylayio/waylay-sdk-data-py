@@ -33,7 +33,7 @@ publish_event_response_content_model_schema = json.loads(
   }, {
     "$ref" : "#/components/schemas/TimestampedResourceEvents"
   }, {
-    "$ref" : "#/components/schemas/Empty"
+    "$ref" : "#/components/schemas/PublishEventResponse_content_anyOf"
   } ]
 }
 """,

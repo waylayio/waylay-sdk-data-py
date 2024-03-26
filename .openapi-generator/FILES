@@ -3,10 +3,8 @@
 Makefile
 README.md
 docs/Aggregate.md
-docs/Auto.md
 docs/DeleteMessages200Response.md
 docs/DeleteSeriesFromParameter.md
-docs/Empty.md
 docs/ErrorResponse.md
 docs/Event.md
 docs/EventTimestamp.md
@@ -17,6 +15,7 @@ docs/GetMetricSeriesFromParameter.md
 docs/GetSeries200ResponseInner.md
 docs/GetSeries200ResponseInnerLatest.md
 docs/Grouping.md
+docs/GroupingAnyOf.md
 docs/HalLink.md
 docs/LatestMeasurement.md
 docs/MessageQuery.md
@@ -32,6 +31,7 @@ docs/PostSeriesForResourceRequest.md
 docs/PostSeriesRequest.md
 docs/PublishEventResponse.md
 docs/PublishEventResponseContent.md
+docs/PublishEventResponseContentAnyOf.md
 docs/PublishResourceEventResponse.md
 docs/PublishResourceEventResponseContent.md
 docs/QueryTimeSeries200Response.md
@@ -69,10 +69,8 @@ test/conftest.py
 test/openapi.py
 test/types/__init__.py
 test/types/aggregate_stub.py
-test/types/auto_stub.py
 test/types/delete_messages200_response_stub.py
 test/types/delete_series_from_parameter_stub.py
-test/types/empty_stub.py
 test/types/error_response_stub.py
 test/types/event_stub.py
 test/types/event_timestamp_stub.py
@@ -81,6 +79,7 @@ test/types/get_datapoints_for_metric_raw200_response_stub.py
 test/types/get_metric_series_from_parameter_stub.py
 test/types/get_series200_response_inner_latest_stub.py
 test/types/get_series200_response_inner_stub.py
+test/types/grouping_any_of_stub.py
 test/types/grouping_stub.py
 test/types/hal_link_stub.py
 test/types/latest_measurement_stub.py
@@ -93,6 +92,7 @@ test/types/message_query_window_stub.py
 test/types/order_stub.py
 test/types/post_series_for_resource_request_stub.py
 test/types/post_series_request_stub.py
+test/types/publish_event_response_content_any_of_stub.py
 test/types/publish_event_response_content_stub.py
 test/types/publish_event_response_stub.py
 test/types/publish_resource_event_response_content_stub.py

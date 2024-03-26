@@ -16,38 +16,38 @@ from pydantic import TypeAdapter
 from ..openapi import MODEL_DEFINITIONS, with_example_provider
 
 try:
-    from waylay.services.data.models.auto import Auto
+    from waylay.services.data.models.grouping_any_of import GroupingAnyOf
 
-    AutoAdapter = TypeAdapter(Auto)
+    GroupingAnyOfAdapter = TypeAdapter(GroupingAnyOf)
     MODELS_AVAILABLE = True
 except ImportError as exc:
     MODELS_AVAILABLE = False
 
-auto_model_schema = json.loads(
+grouping_any_of_model_schema = json.loads(
     r"""{
-  "title" : "auto",
+  "title" : "Grouping_anyOf",
   "type" : "string",
   "enum" : [ "auto" ]
 }
 """,
     object_hook=with_example_provider,
 )
-auto_model_schema.update({"definitions": MODEL_DEFINITIONS})
+grouping_any_of_model_schema.update({"definitions": MODEL_DEFINITIONS})
 
-auto_faker = JSF(auto_model_schema, allow_none_optionals=1)
+grouping_any_of_faker = JSF(grouping_any_of_model_schema, allow_none_optionals=1)
 
 
-class AutoStub:
-    """Auto unit test stubs."""
+class GroupingAnyOfStub:
+    """GroupingAnyOf unit test stubs."""
 
     @classmethod
     def create_json(cls):
         """Create a dict stub instance."""
-        return auto_faker.generate()
+        return grouping_any_of_faker.generate()
 
     @classmethod
-    def create_instance(cls) -> "Auto":
-        """Create Auto stub instance."""
+    def create_instance(cls) -> "GroupingAnyOf":
+        """Create GroupingAnyOf stub instance."""
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
-        return AutoAdapter.validate_python(cls.create_json())
+        return GroupingAnyOfAdapter.validate_python(cls.create_json())
