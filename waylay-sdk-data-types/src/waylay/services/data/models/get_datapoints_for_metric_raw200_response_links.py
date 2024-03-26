@@ -14,12 +14,12 @@ from __future__ import annotations
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.hal_link import HalLink
 
 
-class GetDatapointsForMetricRaw200ResponseLinks(_BaseModel):
+class GetDatapointsForMetricRaw200ResponseLinks(WaylayBaseModel):
     """GetDatapointsForMetricRaw200ResponseLinks."""
 
     next: HalLink | None = None

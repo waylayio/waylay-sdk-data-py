@@ -16,12 +16,12 @@ from pydantic import (
     Field,
     StrictInt,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.scalar_data import ScalarData
 
 
-class GetSeries200ResponseInnerLatest(_BaseModel):
+class GetSeries200ResponseInnerLatest(WaylayBaseModel):
     """GetSeries200ResponseInnerLatest."""
 
     timestamp: StrictInt = Field(

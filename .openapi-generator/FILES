@@ -1,5 +1,6 @@
 .github/workflows/python.yml
 .openapi-generator-ignore
+LICENSE.txt
 Makefile
 README.md
 docs/Aggregate.md

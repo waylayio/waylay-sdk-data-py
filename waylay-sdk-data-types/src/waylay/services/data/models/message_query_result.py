@@ -16,13 +16,13 @@ from typing import List
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.message_query import MessageQuery
 from ..models.message_query_result_results_inner import MessageQueryResultResultsInner
 
 
-class MessageQueryResult(_BaseModel):
+class MessageQueryResult(WaylayBaseModel):
     """MessageQueryResult."""
 
     query: MessageQuery | None = None

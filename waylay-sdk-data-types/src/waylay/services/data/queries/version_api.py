@@ -13,14 +13,14 @@ from __future__ import annotations  # for Python 3.7–3.9
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
 def _health_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class HealthQuery(_BaseModel):
+class HealthQuery(WaylayBaseModel):
     """Model for `health` query parameters."""
 
     model_config = ConfigDict(

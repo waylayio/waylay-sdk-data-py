@@ -16,12 +16,12 @@ from pydantic import (
     Field,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.event_timestamp import EventTimestamp
 
 
-class ResourceEvent(_BaseModel):
+class ResourceEvent(WaylayBaseModel):
     """Measurement object with resource identifier and optional timestamp.."""
 
     resource: StrictStr = Field(description="Primary identifier of a _Resource_")

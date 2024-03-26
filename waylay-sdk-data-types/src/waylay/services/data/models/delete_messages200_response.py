@@ -15,10 +15,10 @@ from pydantic import (
     ConfigDict,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class DeleteMessages200Response(_BaseModel):
+class DeleteMessages200Response(WaylayBaseModel):
     """DeleteMessages200Response."""
 
     message: StrictStr

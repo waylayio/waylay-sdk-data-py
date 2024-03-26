@@ -22,14 +22,14 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.aggregate import Aggregate
 from ..models.grouping import Grouping
 from ..models.timeseries_filter import TimeseriesFilter
 
 
-class SeriesQueryResponse(_BaseModel):
+class SeriesQueryResponse(WaylayBaseModel):
     """SeriesQueryResponse."""
 
     var_from: StrictInt | None = Field(

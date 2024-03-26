@@ -21,14 +21,14 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.message_query_from import MessageQueryFrom
 from ..models.message_query_until import MessageQueryUntil
 from ..models.message_query_window import MessageQueryWindow
 
 
-class MessageQuery(_BaseModel):
+class MessageQuery(WaylayBaseModel):
     """MessageQuery."""
 
     resources: Annotated[List[StrictStr], Field(min_length=1)] = Field(

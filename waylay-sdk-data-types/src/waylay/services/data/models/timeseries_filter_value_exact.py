@@ -14,12 +14,12 @@ from __future__ import annotations
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.timeseries_filter_value_exact_value import TimeseriesFilterValueExactValue
 
 
-class TimeseriesFilterValueExact(_BaseModel):
+class TimeseriesFilterValueExact(WaylayBaseModel):
     """TimeseriesFilterValueExact."""
 
     value: TimeseriesFilterValueExactValue

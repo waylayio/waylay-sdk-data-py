@@ -20,7 +20,7 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
 def _post_series_query_alias_for(field_name: str) -> str:
@@ -33,7 +33,7 @@ def _post_series_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class PostSeriesQuery(_BaseModel):
+class PostSeriesQuery(WaylayBaseModel):
     """Model for `post_series` query parameters."""
 
     forward: Annotated[
@@ -74,7 +74,7 @@ def _post_series_for_resource_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class PostSeriesForResourceQuery(_BaseModel):
+class PostSeriesForResourceQuery(WaylayBaseModel):
     """Model for `post_series_for_resource` query parameters."""
 
     forward: Annotated[
@@ -115,7 +115,7 @@ def _remove_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class RemoveQuery(_BaseModel):
+class RemoveQuery(WaylayBaseModel):
     """Model for `remove` query parameters."""
 
     var_from: Annotated[
@@ -142,7 +142,7 @@ def _stream_events_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class StreamEventsQuery(_BaseModel):
+class StreamEventsQuery(WaylayBaseModel):
     """Model for `stream_events` query parameters."""
 
     model_config = ConfigDict(

@@ -16,10 +16,10 @@ from pydantic import (
     Field,
     StrictInt,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class LatestMeasurement(_BaseModel):
+class LatestMeasurement(WaylayBaseModel):
     """The latest measurement of a series.."""
 
     timestamp: StrictInt | None = Field(

@@ -16,10 +16,10 @@ from pydantic import (
     Field,
     StrictInt,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class TimestampedEvent(_BaseModel):
+class TimestampedEvent(WaylayBaseModel):
     """Measurement object with timestamp."""
 
     timestamp: StrictInt = Field(

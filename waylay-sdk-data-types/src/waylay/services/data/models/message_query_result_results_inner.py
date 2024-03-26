@@ -18,12 +18,12 @@ from pydantic import (
     Field,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.timestamped_event import TimestampedEvent
 
 
-class MessageQueryResultResultsInner(_BaseModel):
+class MessageQueryResultResultsInner(WaylayBaseModel):
     """MessageQueryResultResultsInner."""
 
     resource: StrictStr | None = Field(

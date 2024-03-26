@@ -17,7 +17,7 @@ from pydantic import (
     StrictFloat,
     StrictInt,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.timeseries_filter_operator_operator import (
     TimeseriesFilterOperatorOperator,
@@ -25,7 +25,7 @@ from ..models.timeseries_filter_operator_operator import (
 from ..models.timeseries_filter_value_exact_value import TimeseriesFilterValueExactValue
 
 
-class TimeseriesFilter(_BaseModel):
+class TimeseriesFilter(WaylayBaseModel):
     """Filter that will be applied to datapoints *before* aggregation is performed.."""
 
     operator: TimeseriesFilterOperatorOperator
