@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.11"]
 
     steps:
       - uses: actions/checkout@v4
@@ -58,9 +58,9 @@ jobs:
       - test-minimal
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
 
-    # defaults:
-    #   run:
-    #     working-directory: ./waylay-sdk-data
+    defaults:
+      run:
+        working-directory: ./waylay-sdk-data
 
     name: Publish api package to PyPI
     runs-on: ubuntu-latest
@@ -69,8 +69,8 @@ jobs:
       # url: https://pypi.org/p/waylay-sdk-data
       url: https://test.pypi.org/p/waylay-sdk-data # TODO REMOVE
 
-    permissions:
-      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    # permissions:
+    #   id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
     - uses: actions/checkout@v4
