@@ -17,10 +17,10 @@ from pydantic import (
     StrictFloat,
     StrictInt,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class TimeseriesFilterValueBounds(_BaseModel):
+class TimeseriesFilterValueBounds(WaylayBaseModel):
     """TimeseriesFilterValueBounds."""
 
     lower_bound: StrictFloat | StrictInt = Field(alias="lowerBound")

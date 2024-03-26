@@ -13,14 +13,14 @@ from __future__ import annotations  # for Python 3.7–3.9
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
 def _delete_messages_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class DeleteMessagesQuery(_BaseModel):
+class DeleteMessagesQuery(WaylayBaseModel):
     """Model for `delete_messages` query parameters."""
 
     model_config = ConfigDict(
@@ -36,7 +36,7 @@ def _get_latest_document_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetLatestDocumentQuery(_BaseModel):
+class GetLatestDocumentQuery(WaylayBaseModel):
     """Model for `get_latest_document` query parameters."""
 
     model_config = ConfigDict(
@@ -52,7 +52,7 @@ def _get_latest_messages_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetLatestMessagesQuery(_BaseModel):
+class GetLatestMessagesQuery(WaylayBaseModel):
     """Model for `get_latest_messages` query parameters."""
 
     model_config = ConfigDict(
@@ -68,7 +68,7 @@ def _query_messages_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class QueryMessagesQuery(_BaseModel):
+class QueryMessagesQuery(WaylayBaseModel):
     """Model for `query_messages` query parameters."""
 
     model_config = ConfigDict(

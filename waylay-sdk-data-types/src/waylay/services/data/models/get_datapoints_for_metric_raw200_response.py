@@ -20,7 +20,7 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.get_datapoints_for_metric_raw200_response_links import (
     GetDatapointsForMetricRaw200ResponseLinks,
@@ -29,7 +29,7 @@ from ..models.series_key_value_inner import SeriesKeyValueInner
 from ..models.series_query_response import SeriesQueryResponse
 
 
-class GetDatapointsForMetricRaw200Response(_BaseModel):
+class GetDatapointsForMetricRaw200Response(WaylayBaseModel):
     """GetDatapointsForMetricRaw200Response."""
 
     links: GetDatapointsForMetricRaw200ResponseLinks | None = Field(

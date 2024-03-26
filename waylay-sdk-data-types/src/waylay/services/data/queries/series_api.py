@@ -20,7 +20,7 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.aggregate import Aggregate
 from ..models.order import Order
@@ -34,7 +34,7 @@ def _delete_series_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class DeleteSeriesQuery(_BaseModel):
+class DeleteSeriesQuery(WaylayBaseModel):
     """Model for `delete_series` query parameters."""
 
     var_from: Annotated[
@@ -65,7 +65,7 @@ def _get_datapoints_for_metric_raw_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetDatapointsForMetricRawQuery(_BaseModel):
+class GetDatapointsForMetricRawQuery(WaylayBaseModel):
     """Model for `get_datapoints_for_metric_raw` query parameters."""
 
     var_from: Annotated[
@@ -103,7 +103,7 @@ def _get_last_datapoints_for_metric_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetLastDatapointsForMetricQuery(_BaseModel):
+class GetLastDatapointsForMetricQuery(WaylayBaseModel):
     """Model for `get_last_datapoints_for_metric` query parameters."""
 
     limit: Annotated[
@@ -130,7 +130,7 @@ def _get_last_metric_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetLastMetricQuery(_BaseModel):
+class GetLastMetricQuery(WaylayBaseModel):
     """Model for `get_last_metric` query parameters."""
 
     model_config = ConfigDict(
@@ -158,7 +158,7 @@ def _get_metric_series_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetMetricSeriesQuery(_BaseModel):
+class GetMetricSeriesQuery(WaylayBaseModel):
     """Model for `get_metric_series` query parameters."""
 
     var_from: Annotated[
@@ -199,7 +199,7 @@ def _get_series_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class GetSeriesQuery(_BaseModel):
+class GetSeriesQuery(WaylayBaseModel):
     """Model for `get_series` query parameters."""
 
     model_config = ConfigDict(
@@ -215,7 +215,7 @@ def _query_time_series_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class QueryTimeSeriesQuery(_BaseModel):
+class QueryTimeSeriesQuery(WaylayBaseModel):
     """Model for `query_time_series` query parameters."""
 
     model_config = ConfigDict(

@@ -20,13 +20,13 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.series_key_value_inner import SeriesKeyValueInner
 from ..models.series_query_response import SeriesQueryResponse
 
 
-class TimeseriesJsonResult(_BaseModel):
+class TimeseriesJsonResult(WaylayBaseModel):
     """TimeseriesJsonResult."""
 
     query: SeriesQueryResponse

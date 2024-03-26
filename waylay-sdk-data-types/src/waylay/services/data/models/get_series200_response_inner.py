@@ -16,12 +16,12 @@ from pydantic import (
     Field,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.get_series200_response_inner_latest import GetSeries200ResponseInnerLatest
 
 
-class GetSeries200ResponseInner(_BaseModel):
+class GetSeries200ResponseInner(WaylayBaseModel):
     """GetSeries200ResponseInner."""
 
     name: StrictStr = Field(

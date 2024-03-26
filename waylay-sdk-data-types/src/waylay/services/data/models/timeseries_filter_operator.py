@@ -14,14 +14,14 @@ from __future__ import annotations
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.timeseries_filter_operator_operator import (
     TimeseriesFilterOperatorOperator,
 )
 
 
-class TimeseriesFilterOperator(_BaseModel):
+class TimeseriesFilterOperator(WaylayBaseModel):
     """TimeseriesFilterOperator."""
 
     operator: TimeseriesFilterOperatorOperator

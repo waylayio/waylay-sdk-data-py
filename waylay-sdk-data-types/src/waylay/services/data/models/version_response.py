@@ -15,10 +15,10 @@ from pydantic import (
     ConfigDict,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class VersionResponse(_BaseModel):
+class VersionResponse(WaylayBaseModel):
     """VersionResponse."""
 
     version: StrictStr

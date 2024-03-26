@@ -14,12 +14,12 @@ from __future__ import annotations
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.event_timestamp import EventTimestamp
 
 
-class Event(_BaseModel):
+class Event(WaylayBaseModel):
     """Measurement object with optional event timestamp.."""
 
     timestamp: EventTimestamp | None = None

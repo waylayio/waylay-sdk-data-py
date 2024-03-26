@@ -15,14 +15,14 @@ from pydantic import (
     ConfigDict,
     StrictStr,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.publish_resource_event_response_content import (
     PublishResourceEventResponseContent,
 )
 
 
-class PublishResourceEventResponse(_BaseModel):
+class PublishResourceEventResponse(WaylayBaseModel):
     """PublishResourceEventResponse."""
 
     message: StrictStr | None = None

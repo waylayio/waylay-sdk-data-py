@@ -14,10 +14,10 @@ from __future__ import annotations
 from pydantic import (
     ConfigDict,
 )
-from waylay.sdk.api._models import _BaseModel
+from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-class PublishEventResponseContentAnyOf(_BaseModel):
+class PublishEventResponseContentAnyOf(WaylayBaseModel):
     """Marks that multiple events where published."""
 
     model_config = ConfigDict(
