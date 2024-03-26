@@ -93,7 +93,7 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/ # TODO remove
-        packages-dir: waylay-sdk-data/
+        packages-dir: waylay-sdk-data/dist
 
   publish-types:
     needs: 
@@ -137,7 +137,7 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/ # TODO remove
-        packages-dir: waylay-sdk-data-types/
+        packages-dir: waylay-sdk-data-types/dist
 
   github-release:
     name: Create GitHub Release
