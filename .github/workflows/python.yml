@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Git with token to access other private repositories
@@ -69,8 +69,10 @@ jobs:
       # url: https://pypi.org/p/waylay-sdk-data
       url: https://test.pypi.org/p/waylay-sdk-data # TODO REMOVE
 
-    # permissions:
-    #   id-token: write  # IMPORTANT: mandatory for trusted publishing
+    permissions:
+      actions: read
+      contents: read
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
     - uses: actions/checkout@v4
@@ -112,6 +114,8 @@ jobs:
     
 
     permissions:
+      actions: read
+      contents: read
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
