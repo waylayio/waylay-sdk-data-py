@@ -56,11 +56,11 @@ jobs:
     needs: 
       - test
       - test-minimal
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
 
-    defaults:
-      run:
-        working-directory: ./waylay-sdk-data
+    # defaults:
+    #   run:
+    #     working-directory: ./waylay-sdk-data
 
     name: Publish api package to PyPI
     runs-on: ubuntu-latest
@@ -84,19 +84,20 @@ jobs:
       id: check-tag
       uses: samuelcolvin/check-python-version@v4.1
       with:
-        version_file_path: ./waylay.services.data/service/__init__.py
+        version_file_path: waylay-sdk-data/src/waylay.services.data/service/__init__.py
     - name: Build
       run: python3 -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/ # TODO remove
+        packages-dir: waylay-sdk-data/
 
   publish-types:
     needs: 
       - test
       - test-minimal
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
 
     defaults:
       run:
@@ -125,13 +126,14 @@ jobs:
       id: check-tag
       uses: samuelcolvin/check-python-version@v4.1
       with:
-        version_file_path: ./waylay.services.data/models/__init__.py
+        version_file_path: waylay-sdk-data-types/src/waylay.services.data/models/__init__.py
     - name: Build
       run: python3 -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/ # TODO remove
+        packages-dir: waylay-sdk-data-types/
 
   github-release:
     name: Create GitHub Release

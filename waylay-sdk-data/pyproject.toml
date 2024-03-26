@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waylay-sdk-data"
-version = "2.14.0-0"
+version = "2.14.0-beta00"
 description = "Waylay Broker"
 authors = [
     { name = "Waylay", email = "dev@waylay.io"}
