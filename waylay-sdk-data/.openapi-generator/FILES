@@ -1,0 +1,10 @@
+pyproject.toml
+src/waylay/services/data/api/__init__.py
+src/waylay/services/data/api/events_api.py
+src/waylay/services/data/api/messages_api.py
+src/waylay/services/data/api/py.typed
+src/waylay/services/data/api/series_api.py
+src/waylay/services/data/api/version_api.py
+src/waylay/services/data/service/__init__.py
+src/waylay/services/data/service/py.typed
+src/waylay/services/data/service/service.py
