@@ -593,8 +593,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TimestampedResourceEvent'
             - $ref: '#/components/schemas/TimestampedResourceEvents'
-            - title: Empty
-              type: object
+            - type: object
               description: Marks that multiple events where published
               enum:
                 - {}
@@ -606,8 +605,7 @@ components:
         content:
           anyOf:
             - $ref: '#/components/schemas/TimestampedEvent'
-            - title: Empty
-              type: object
+            - type: object
               description: Marks that multiple events where published
               enum:
                 - {}
@@ -842,7 +840,6 @@ components:
         url: https://docs.waylay.io/#/api/broker/?id=grouping
       anyOf:
         - type: string
-          title: auto
           enum:
             - auto
         - $ref: '#/components/schemas/DurationWithUnit'

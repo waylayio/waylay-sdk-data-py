@@ -53,7 +53,6 @@ clean:
 	rm -fr */.*_cache
 	rm -fr */src/*.egg-info
 	rm -fr **/__pycache__
-	rm -rf ${TEST_RUN_FOLDER}
 
 lint: install ### Run linting checks
 	@${VENV_TYPES_ACTIVATE} && make exec-lint
@@ -105,7 +104,7 @@ ${TEST_RUN_FOLDER}: # workaround for JSF schema resolution
 		done
 
 exec-test: ${TEST_RUN_FOLDER} ### Run unit tests
-	cd ${TEST_RUN_FOLDER} && pytest ..
+	pytest
 
 exec-format: ### Format code
 	${CMD_FIX} ${API_FOLDER}

@@ -7,10 +7,9 @@ ignore-init-module-imports = true
 ignore=["F811"]
 # https://docs.astral.sh/ruff/rules
 select= [
-    "UP007", "FA102",  # convert Union to | (pep-604)
-    "I001", "F401",  # sort and remove unused imports
+    "UP007", "FA102", "I001",  # convert Union to | (pep-604)
+    "F401", "E303",  # remove unused imports
     "PIE790",  # remove unnecessary pass statements
-    "E303",  # too many blank lines
 ]
 
 [tool.ruff.lint.per-file-ignores]
