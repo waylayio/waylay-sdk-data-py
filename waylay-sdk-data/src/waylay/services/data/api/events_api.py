@@ -13,6 +13,7 @@ from __future__ import annotations  # for Python 3.7–3.9
 from typing import (
     TYPE_CHECKING,
     Any,
+    AsyncIterator,
     Dict,
     Literal,
     Optional,
@@ -35,6 +36,7 @@ from waylay.sdk.api import (
     Response,
 )
 from waylay.sdk.api._models import Model
+from waylay.sdk.api.constants import STREAM_TIMEOUTS
 from waylay.sdk.plugin import WithApiClient
 
 if TYPE_CHECKING:
@@ -623,8 +625,10 @@ class EventsApi(WithApiClient):
         select_path: Literal[""] = "",
         response_type: Literal[None] = None,
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
-    ) -> TimestampedResourceEvent: ...
+    ) -> AsyncIterator[TimestampedResourceEvent]: ...
 
     @overload
     async def stream_events(
@@ -638,8 +642,10 @@ class EventsApi(WithApiClient):
         select_path: Literal[""] = "",
         response_type: T,
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
-    ) -> T: ...
+    ) -> AsyncIterator[T]: ...
 
     @overload
     async def stream_events(
@@ -653,6 +659,8 @@ class EventsApi(WithApiClient):
         select_path: Literal["_not_used_"] = "_not_used_",
         response_type: Literal[None] = None,  # not used
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
     ) -> Response: ...
 
@@ -668,8 +676,10 @@ class EventsApi(WithApiClient):
         select_path: str,
         response_type: Literal[None] = None,
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
-    ) -> Model: ...
+    ) -> AsyncIterator[Model]: ...
 
     @overload
     async def stream_events(
@@ -683,8 +693,10 @@ class EventsApi(WithApiClient):
         select_path: str,
         response_type: T,
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
-    ) -> T: ...
+    ) -> AsyncIterator[T]: ...
 
     async def stream_events(
         self,
@@ -697,8 +709,15 @@ class EventsApi(WithApiClient):
         select_path: str = "",
         response_type: T | None = None,
         headers: HeaderTypes | None = None,
+        stream: bool = True,
+        timeout=STREAM_TIMEOUTS,
         **kwargs,
-    ) -> TimestampedResourceEvent | T | Response | Model:
+    ) -> (
+        AsyncIterator[TimestampedResourceEvent]
+        | AsyncIterator[T]
+        | Response
+        | AsyncIterator[Model]
+    ):
         """Stream Events For Resource.
 
         Opens a data stream for the _Events_ of the given _Resource_.
@@ -764,6 +783,8 @@ class EventsApi(WithApiClient):
             params=query,
             **body_args,
             headers=headers,
+            stream=stream,
+            timeout=timeout,
             **kwargs,
             response_type=response_types_map,
             select_path=select_path,

@@ -18,7 +18,7 @@ from pytest_httpx import HTTPXMock
 from typeguard import check_type
 from waylay.sdk import ApiClient, WaylayClient
 from waylay.sdk.api._models import Model
-from waylay.services.data.api import VersionApi
+from waylay.services.data.api import AboutApi
 from waylay.services.data.service import DataService
 
 from ..types.version_response_stub import VersionResponseStub
@@ -36,16 +36,16 @@ null, true, false = None, True, False
 
 
 @pytest.fixture
-def version_api(waylay_api_client: ApiClient) -> VersionApi:
-    return VersionApi(waylay_api_client)
+def about_api(waylay_api_client: ApiClient) -> AboutApi:
+    return AboutApi(waylay_api_client)
 
 
 def test_registered(waylay_client: WaylayClient):
-    """Test that VersionApi api is registered in the sdk client."""
-    assert isinstance(waylay_client.data.version, VersionApi)
+    """Test that AboutApi api is registered in the sdk client."""
+    assert isinstance(waylay_client.data.about, AboutApi)
 
 
-def _health_set_mock_response(httpx_mock: HTTPXMock, gateway_url: str):
+def _get_set_mock_response(httpx_mock: HTTPXMock, gateway_url: str):
     mock_response = VersionResponseStub.create_json()
     httpx_mock_kwargs = {
         "method": "GET",
@@ -58,27 +58,27 @@ def _health_set_mock_response(httpx_mock: HTTPXMock, gateway_url: str):
 
 @pytest.mark.asyncio
 @pytest.mark.skipif(not MODELS_AVAILABLE, reason="Types not installed.")
-async def test_health(service: DataService, gateway_url: str, httpx_mock: HTTPXMock):
-    """Test case for health
-    Version
+async def test_get(service: DataService, gateway_url: str, httpx_mock: HTTPXMock):
+    """Test case for get
+    Get Service Status
     """
     # set path params
     kwargs = {}
-    _health_set_mock_response(httpx_mock, gateway_url)
-    resp = await service.version.health(**kwargs)
+    _get_set_mock_response(httpx_mock, gateway_url)
+    resp = await service.about.get(**kwargs)
     check_type(resp, Union[VersionResponse,])
 
 
 @pytest.mark.asyncio
 @pytest.mark.skipif(MODELS_AVAILABLE, reason="Types installed.")
-async def test_health_without_types(
+async def test_get_without_types(
     service: DataService, gateway_url: str, httpx_mock: HTTPXMock
 ):
-    """Test case for health with models not installed
-    Version
+    """Test case for get with models not installed
+    Get Service Status
     """
     # set path params
     kwargs = {}
-    _health_set_mock_response(httpx_mock, gateway_url)
-    resp = await service.version.health(**kwargs)
+    _get_set_mock_response(httpx_mock, gateway_url)
+    resp = await service.about.get(**kwargs)
     check_type(resp, Model)

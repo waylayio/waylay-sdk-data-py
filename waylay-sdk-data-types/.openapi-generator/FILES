@@ -1,5 +1,4 @@
 LICENSE.txt
-README.md
 pyproject.toml
 src/waylay/services/data/models/__init__.py
 src/waylay/services/data/models/aggregate.py
@@ -55,8 +54,8 @@ src/waylay/services/data/models/timestamped_resource_event.py
 src/waylay/services/data/models/ttl_duration.py
 src/waylay/services/data/models/version_response.py
 src/waylay/services/data/queries/__init__.py
+src/waylay/services/data/queries/about_api.py
 src/waylay/services/data/queries/events_api.py
 src/waylay/services/data/queries/messages_api.py
 src/waylay/services/data/queries/py.typed
 src/waylay/services/data/queries/series_api.py
-src/waylay/services/data/queries/version_api.py

@@ -40,21 +40,21 @@ tags:
     externalDocs:
       description: Waylay Documentation
       url: https://docs.waylay.io/#/api/broker/?id=time-series-data-retrieval
-  - name: Version
+  - name: About
 paths:
   /data/v1/:
     get:
-      summary: Version
-      operationId: health
+      summary: Get Service Status
+      operationId: get_about
       tags:
-        - Version
-      description: Gets the status and version of the service.
+        - About
+      description: Get the status and version of the service.
       responses:
         '200':
           $ref: '#/components/responses/VersionResponse'
       security:
         - waylayApiKeySecret: []
-      x-py-method: health
+      x-py-method: get
       x-consumes-multipart: false
       x-consumes-urlencoded: false
       x-consumes-json: false
@@ -146,6 +146,7 @@ paths:
             text/event-stream:
               schema:
                 $ref: '#/components/schemas/TimestampedResourceEvent'
+          x-is-event-stream: true
         '406':
           $ref: '#/components/responses/InvalidContentTypeResponse'
       security:
@@ -155,6 +156,7 @@ paths:
       x-consumes-urlencoded: false
       x-consumes-json: false
       x-consumes-other: false
+      x-produces-event-stream: true
   /data/v1/messages/{resourceId}:
     get:
       summary: Retrieve Messages For Resource
