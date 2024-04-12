@@ -1,26 +1,26 @@
-# waylay.services.data.VersionApi
+# waylay.services.data.AboutApi
 
 All URIs are relative to *https://api.waylay.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**health**](VersionApi.md#health) | **GET** /data/v1/ | Version
+[**get**](AboutApi.md#get) | **GET** /data/v1/ | Get Service Status
 
-# **health**
-> health(
+# **get**
+> get(
 > headers
 > ) -> VersionResponse
 
-Version
+Get Service Status
 
-Gets the status and version of the service.
+Get the status and version of the service.
 
 ### Example
 
 ```python
 from pprint import pprint
 
-# Import the waylay-client from the waylay-sdk package
+# Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
 
@@ -30,14 +30,14 @@ waylay_client = WaylayClient.from_profile()
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.version_response import VersionResponse
 try:
-    # Version
+    # Get Service Status
     # calls `GET /data/v1/`
-    api_response = await waylay_client.data.version.health(
+    api_response = await waylay_client.data.about.get(
     )
-    print("The response of data.version.health:\n")
+    print("The response of data.about.get:\n")
     pprint(api_response)
 except ApiError as e:
-    print("Exception when calling data.version.health: %s\n" % e)
+    print("Exception when calling data.about.get: %s\n" % e)
 ```
 
 ### Endpoint

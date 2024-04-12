@@ -31,15 +31,15 @@ tags:
   externalDocs:
     description: Waylay Documentation
     url: https://docs.waylay.io/#/api/broker/?id=time-series-data-retrieval
-- name: Version
+- name: About
 paths:
   /data/v1/:
     get:
-      summary: Version
-      operationId: health
+      summary: Get Service Status
+      operationId: get_about
       tags:
-      - Version
-      description: Gets the status and version of the service.
+      - About
+      description: Get the status and version of the service.
       responses:
         '200':
           $ref: '#/components/responses/VersionResponse'

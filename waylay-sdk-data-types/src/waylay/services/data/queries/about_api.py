@@ -16,17 +16,17 @@ from pydantic import (
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
-def _health_query_alias_for(field_name: str) -> str:
+def _get_query_alias_for(field_name: str) -> str:
     return field_name
 
 
-class HealthQuery(WaylayBaseModel):
-    """Model for `health` query parameters."""
+class GetQuery(WaylayBaseModel):
+    """Model for `get` query parameters."""
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
-        alias_generator=_health_query_alias_for,
+        alias_generator=_get_query_alias_for,
         populate_by_name=True,
     )

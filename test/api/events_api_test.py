@@ -11,7 +11,7 @@ Do not edit the class manually.
 import json
 import re
 from importlib.util import find_spec
-from typing import Union
+from typing import AsyncIterator, Union, get_args
 from urllib.parse import quote
 
 import pytest
@@ -252,8 +252,9 @@ def _stream_events_set_mock_response(
     httpx_mock_kwargs = {
         "method": "GET",
         "url": re.compile(f"^{gateway_url}/data/v1/events/{resourceId}(\\?.*)?"),
-        "content": json.dumps(mock_response, default=str),
+        "content": json.dumps(mock_response, default=str) + "\n",
         "status_code": 200,
+        "headers": {"content-type": "application/x-ndjson"},
     }
     httpx_mock.add_response(**httpx_mock_kwargs)
 
@@ -272,7 +273,10 @@ async def test_stream_events(
     kwargs = {}
     _stream_events_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.events.stream_events(resourceId, **kwargs)
-    check_type(resp, Union[TimestampedResourceEvent,])
+    check_type(resp, Union[AsyncIterator[TimestampedResourceEvent],])
+    async for item in resp:
+        check_type(item, get_args(Union[AsyncIterator[TimestampedResourceEvent],])[0])
+        break  # Test only the first value
 
 
 @pytest.mark.asyncio
@@ -290,3 +294,6 @@ async def test_stream_events_without_types(
     _stream_events_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.events.stream_events(resourceId, **kwargs)
     check_type(resp, Model)
+    async for item in resp:
+        check_type(item, Model)
+        break  # Test only the first value
