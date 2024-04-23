@@ -27,8 +27,5 @@ class TimeseriesFilterValueBounds(WaylayBaseModel):
     upper_bound: StrictFloat | StrictInt = Field(alias="upperBound")
 
     model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-        extra="ignore",
+        populate_by_name=True, protected_namespaces=(), extra="ignore"
     )

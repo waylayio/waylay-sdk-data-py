@@ -56,7 +56,6 @@ class PostSeriesQuery(WaylayBaseModel):
     ] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_post_series_query_alias_for,
@@ -97,7 +96,6 @@ class PostSeriesForResourceQuery(WaylayBaseModel):
     ] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_post_series_for_resource_query_alias_for,
@@ -130,7 +128,6 @@ class RemoveQuery(WaylayBaseModel):
     ] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_remove_query_alias_for,
@@ -146,7 +143,6 @@ class StreamEventsQuery(WaylayBaseModel):
     """Model for `stream_events` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_stream_events_query_alias_for,

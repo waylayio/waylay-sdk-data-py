@@ -21,8 +21,5 @@ class PublishEventResponseContentAnyOf(WaylayBaseModel):
     """Marks that multiple events where published."""
 
     model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-        extra="allow",
+        populate_by_name=True, protected_namespaces=(), extra="allow"
     )

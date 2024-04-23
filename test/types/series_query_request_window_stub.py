@@ -50,11 +50,22 @@ class SeriesQueryRequestWindowStub:
     @classmethod
     def create_json(cls):
         """Create a dict stub instance."""
-        return series_query_request_window_faker.generate()
+        return series_query_request_window_faker.generate(
+            use_defaults=True, use_examples=True
+        )
 
     @classmethod
     def create_instance(cls) -> "SeriesQueryRequestWindow":
         """Create SeriesQueryRequestWindow stub instance."""
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
-        return SeriesQueryRequestWindowAdapter.validate_python(cls.create_json())
+        json = cls.create_json()
+        if not json:
+            # use backup example based on the pydantic model schema
+            backup_faker = JSF(
+                SeriesQueryRequestWindowAdapter.json_schema(), allow_none_optionals=1
+            )
+            json = backup_faker.generate(use_defaults=True, use_examples=True)
+        return SeriesQueryRequestWindowAdapter.validate_python(
+            json, context={"skip_validation": True}
+        )
