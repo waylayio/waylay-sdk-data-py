@@ -45,7 +45,6 @@ class DeleteSeriesQuery(WaylayBaseModel):
     ] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_delete_series_query_alias_for,
@@ -87,7 +86,6 @@ class GetDatapointsForMetricRawQuery(WaylayBaseModel):
     order: Annotated[Order | None, Field(description="sort order")] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_datapoints_for_metric_raw_query_alias_for,
@@ -118,7 +116,6 @@ class GetLastDatapointsForMetricQuery(WaylayBaseModel):
     ] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_last_datapoints_for_metric_query_alias_for,
@@ -134,7 +131,6 @@ class GetLastMetricQuery(WaylayBaseModel):
     """Model for `get_last_metric` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_last_metric_query_alias_for,
@@ -187,7 +183,6 @@ class GetMetricSeriesQuery(WaylayBaseModel):
     order: Annotated[Order | None, Field(description="sort order")] = None
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_metric_series_query_alias_for,
@@ -203,7 +198,6 @@ class GetSeriesQuery(WaylayBaseModel):
     """Model for `get_series` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_series_query_alias_for,
@@ -219,7 +213,6 @@ class QueryTimeSeriesQuery(WaylayBaseModel):
     """Model for `query_time_series` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_query_time_series_query_alias_for,

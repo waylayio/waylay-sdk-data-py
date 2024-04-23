@@ -24,7 +24,6 @@ class DeleteMessagesQuery(WaylayBaseModel):
     """Model for `delete_messages` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_delete_messages_query_alias_for,
@@ -40,7 +39,6 @@ class GetLatestDocumentQuery(WaylayBaseModel):
     """Model for `get_latest_document` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_latest_document_query_alias_for,
@@ -56,7 +54,6 @@ class GetLatestMessagesQuery(WaylayBaseModel):
     """Model for `get_latest_messages` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_get_latest_messages_query_alias_for,
@@ -72,7 +69,6 @@ class QueryMessagesQuery(WaylayBaseModel):
     """Model for `query_messages` query parameters."""
 
     model_config = ConfigDict(
-        validate_assignment=True,
         protected_namespaces=(),
         extra="allow",
         alias_generator=_query_messages_query_alias_for,
