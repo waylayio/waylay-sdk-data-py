@@ -37,7 +37,7 @@ class GetDatapointsForMetricRaw200Response(WaylayBaseModel):
     )
     query: SeriesQueryResponse
     series: List[
-        Annotated[List[SeriesKeyValueInner], Field(min_length=2, max_length=2)]
+        Annotated[List[SeriesKeyValueInner | None], Field(min_length=2, max_length=2)]
     ] = Field(description="Array of timestamp-value tuples")
 
     model_config = ConfigDict(

@@ -22,9 +22,7 @@ from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 class TimestampedEvent(WaylayBaseModel):
     """Measurement object with timestamp."""
 
-    timestamp: StrictInt = Field(
-        description="Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds."
-    )
+    timestamp: StrictInt = Field(description="Event timestamp")
 
     model_config = ConfigDict(
         populate_by_name=True, protected_namespaces=(), extra="allow"

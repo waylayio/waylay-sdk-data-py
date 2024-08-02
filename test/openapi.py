@@ -300,6 +300,21 @@ _latest_measurement_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"LatestMeasurement": _latest_measurement_model_schema})
 
+_measurements_model_schema = json.loads(
+    r"""{
+  "title" : "Measurements",
+  "description" : "Values in an _Event_ payload.\nNote that only _scalar_ data is stored in the timeseries, while\nArrays and objects are only stored in the _Message Cache_.",
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/ScalarData"
+  }, {
+    "$ref" : "#/components/schemas/Object_Data"
+  } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"Measurements": _measurements_model_schema})
+
 _message_query_model_schema = json.loads(
     r"""{
   "required" : [ "limit", "resources" ],
@@ -422,6 +437,26 @@ _message_query_window_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({"MessageQuery_window": _message_query_window_model_schema})
+
+_object_data_model_schema = json.loads(
+    r"""{
+  "title" : "Object Data",
+  "description" : "Event data stored only in the _Message Cache_.",
+  "oneOf" : [ {
+    "title" : "Object",
+    "type" : "object"
+  }, {
+    "title" : "Array",
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/components/schemas/Measurements"
+    }
+  } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"Object_Data": _object_data_model_schema})
 
 _order_model_schema = json.loads(
     r"""{

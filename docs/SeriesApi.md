@@ -145,7 +145,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query['from']** (dict) <br> **query.var_from** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period. If not specified, a period of 7 days before &#x60;until&#x60; (or before the request was received) will be queried. | [optional] 
 **query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
 **query['limit']** (dict) <br> **query.limit** (Query) | **int** | query parameter `"limit"` | max number of values to retrieve | [optional] [default 1]
-**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] 
+**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -381,7 +381,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query['aggregate']** (dict) <br> **query.aggregate** (Query) | [**Aggregate**](.md) | query parameter `"aggregate"` | Specifies the aggregation function to use | [optional] 
 **query['aggregates']** (dict) <br> **query.aggregates** (Query) | **str** | query parameter `"aggregates"` | comma-separated list of aggregation functions | [optional] 
 **query['grouping']** (dict) <br> **query.grouping** (Query) | [**Grouping**](.md) | query parameter `"grouping"` | time period over which timeseries data must be aggregates | [optional] 
-**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] 
+**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type

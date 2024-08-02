@@ -20,6 +20,7 @@ docs/Grouping.md
 docs/GroupingAnyOf.md
 docs/HalLink.md
 docs/LatestMeasurement.md
+docs/Measurements.md
 docs/MessageQuery.md
 docs/MessageQueryFrom.md
 docs/MessageQueryResult.md
@@ -27,6 +28,7 @@ docs/MessageQueryResultResultsInner.md
 docs/MessageQueryUntil.md
 docs/MessageQueryWindow.md
 docs/MessagesApi.md
+docs/ObjectData.md
 docs/Operation.md
 docs/Order.md
 docs/PostSeriesForResourceRequest.md
@@ -84,12 +86,14 @@ test/types/grouping_any_of_stub.py
 test/types/grouping_stub.py
 test/types/hal_link_stub.py
 test/types/latest_measurement_stub.py
+test/types/measurements_stub.py
 test/types/message_query_from_stub.py
 test/types/message_query_result_results_inner_stub.py
 test/types/message_query_result_stub.py
 test/types/message_query_stub.py
 test/types/message_query_until_stub.py
 test/types/message_query_window_stub.py
+test/types/object_data_stub.py
 test/types/order_stub.py
 test/types/post_series_for_resource_request_stub.py
 test/types/post_series_request_stub.py
