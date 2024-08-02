@@ -16,6 +16,7 @@ src/waylay/services/data/models/grouping.py
 src/waylay/services/data/models/grouping_any_of.py
 src/waylay/services/data/models/hal_link.py
 src/waylay/services/data/models/latest_measurement.py
+src/waylay/services/data/models/measurements.py
 src/waylay/services/data/models/message_query.py
 src/waylay/services/data/models/message_query_from.py
 src/waylay/services/data/models/message_query_result.py
@@ -23,6 +24,7 @@ src/waylay/services/data/models/message_query_result_results_inner.py
 src/waylay/services/data/models/message_query_until.py
 src/waylay/services/data/models/message_query_window.py
 src/waylay/services/data/models/object.py
+src/waylay/services/data/models/object_data.py
 src/waylay/services/data/models/order.py
 src/waylay/services/data/models/post_series_for_resource_request.py
 src/waylay/services/data/models/post_series_request.py

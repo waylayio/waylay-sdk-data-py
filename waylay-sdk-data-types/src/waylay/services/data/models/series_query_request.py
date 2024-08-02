@@ -47,7 +47,7 @@ class SeriesQueryRequest(WaylayBaseModel):
         default=None, alias="maxResults"
     )
     filter: TimeseriesFilter | None = None
-    order: Order | None = None
+    order: Order | None = Order.ASCENDING
 
     model_config = ConfigDict(
         populate_by_name=True, protected_namespaces=(), extra="ignore"

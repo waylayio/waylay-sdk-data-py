@@ -7,7 +7,7 @@ Measurement object with resource identifier and timestamp.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resource** | **str** | Primary identifier of a _Resource_ | 
-**timestamp** | **int** | Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds. | 
+**timestamp** | **int** | Event timestamp | 
 
 ## Example
 

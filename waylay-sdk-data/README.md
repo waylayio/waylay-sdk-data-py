@@ -12,13 +12,16 @@ Note that the typed model classes for all path params, query params, body params
 This package requires Python 3.9+.
 
 ## Installation
-Typically this package is installed when installing the [waylay-sdk-core](https://pypi.org/project/waylay-sdk/) package to enable the service's functionality.
-When the service api methods are required, waylay-sdk-data is included in:
-- ```pip install waylay-sdk-core[data]``` to install `waylay-sdk-core` along with only this service, or
-- ```pip install waylay-sdk-core[services]``` to install `waylay-sdk-core` along with all services.
-When the typed models are required, both waylay-sdk-data and waylay-sdk-data-types are included in:
-- ```pip install waylay-sdk-core[data,data-types]``` to install `waylay-sdk-core` along with only this service including the typed models, or
-- ```pip install waylay-sdk-core[services,services-types]``` to install `waylay-sdk-core` along with all services along with the typed models.
+
+Normally this package is installed together with support for other services using the [waylay-sdk](https://pypi.org/project/waylay-sdk/) umbrella package:
+* `pip install waylay-sdk` will install `waylay-sdk-data` together with the SDK api packages for other services.
+* `pip install waylay-sdk[types-data]` will additionally install the types package `waylay-sdk-data-types`.
+* `pip install waylay-sdk[types]` will install the types packages for this and all other services.
+
+Alternatively, you can install support for this _data_ service only, installing or extending an existing [waylay-sdk-core](https://pypi.org/project/waylay-sdk-core/):
+
+- `pip install waylay-sdk-data` to only install api support for _data_.
+- `pip install waylay-sdk-data[types]` to additionally install type support for _data_.
 
 ## Usage
 

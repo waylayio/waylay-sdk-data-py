@@ -6,7 +6,7 @@ Measurement object with timestamp
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**timestamp** | **int** | Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds. | 
+**timestamp** | **int** | Event timestamp | 
 
 ## Example
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **resources** | **List[str]** |  | 
 **max_results** | **int** |  | [optional] 
 **filter** | [**TimeseriesFilter**](TimeseriesFilter.md) |  | [optional] 
-**order** | [**Order**](Order.md) |  | [optional] 
+**order** | [**Order**](Order.md) |  | [optional] [default to Order.ASCENDING]
 
 ## Example
 

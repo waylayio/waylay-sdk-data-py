@@ -24,9 +24,7 @@ class TimestampedResourceEvent(WaylayBaseModel):
     """Measurement object with resource identifier and timestamp.."""
 
     resource: StrictStr = Field(description="Primary identifier of a _Resource_")
-    timestamp: StrictInt = Field(
-        description="Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds."
-    )
+    timestamp: StrictInt = Field(description="Event timestamp")
 
     model_config = ConfigDict(
         populate_by_name=True, protected_namespaces=(), extra="allow"
