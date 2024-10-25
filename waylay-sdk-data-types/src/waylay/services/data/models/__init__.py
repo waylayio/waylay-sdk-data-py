@@ -34,7 +34,7 @@ from .grouping import Grouping
 from .grouping_any_of import GroupingAnyOf
 from .hal_link import HalLink
 from .latest_measurement import LatestMeasurement
-from .measurements import Measurements
+from .measurements import Measurements, ObjectData
 from .message_query import MessageQuery
 from .message_query_from import MessageQueryFrom
 from .message_query_result import MessageQueryResult
@@ -42,7 +42,6 @@ from .message_query_result_results_inner import MessageQueryResultResultsInner
 from .message_query_until import MessageQueryUntil
 from .message_query_window import MessageQueryWindow
 from .multiple_series_query_request_inner import MultipleSeriesQueryRequestInner
-from .object_data import ObjectData
 from .order import Order
 from .post_series_for_resource_request import PostSeriesForResourceRequest
 from .post_series_request import PostSeriesRequest
