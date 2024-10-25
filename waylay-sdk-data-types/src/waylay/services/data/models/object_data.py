@@ -9,6 +9,16 @@ Do not edit the class manually.
 
 """
 
-from .measurements import ObjectData
+from __future__ import annotations
 
-__all__ = ["ObjectData"]
+from typing import (
+    List,
+    Union,
+)
+
+from typing_extensions import (
+    Annotated,  # >=3.9
+)
+
+ObjectData = Union[Annotated[object, ""], Annotated[List[Measurements], ""]]
+"""Event data stored only in the _Message Cache_.."""

@@ -20,9 +20,15 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
+from ..models.multiple_series_query_request_inner import MultipleSeriesQueryRequestInner
 from ..models.series_query_request import SeriesQueryRequest
+from ..models.series_query_without_aggregates_request import (
+    SeriesQueryWithoutAggregatesRequest,
+)
 
 QueryTimeSeriesRequest = Union[
-    Annotated[SeriesQueryRequest, ""], Annotated[List[SeriesQueryRequest], ""]
+    Annotated[SeriesQueryRequest, ""],
+    Annotated[SeriesQueryWithoutAggregatesRequest, ""],
+    Annotated[List[MultipleSeriesQueryRequestInner], ""],
 ]
 """QueryTimeSeriesRequest."""

@@ -438,6 +438,22 @@ _message_query_window_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"MessageQuery_window": _message_query_window_model_schema})
 
+_multiple_series_query_request_inner_model_schema = json.loads(
+    r"""{
+  "title" : "MultipleSeriesQueryRequest_inner",
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/SeriesQueryRequest"
+  }, {
+    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
+  } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({
+    "MultipleSeriesQueryRequest_inner": _multiple_series_query_request_inner_model_schema
+})
+
 _object_data_model_schema = json.loads(
     r"""{
   "title" : "Object Data",
@@ -600,6 +616,8 @@ _query_time_series_request_model_schema = json.loads(
     r"""{
   "oneOf" : [ {
     "$ref" : "#/components/schemas/SeriesQueryRequest"
+  }, {
+    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
   }, {
     "$ref" : "#/components/schemas/MultipleSeriesQueryRequest"
   } ]
@@ -794,6 +812,56 @@ _series_query_response_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({"SeriesQueryResponse": _series_query_response_model_schema})
+
+_series_query_without_aggregates_request_model_schema = json.loads(
+    r"""{
+  "required" : [ "metric", "resources" ],
+  "type" : "object",
+  "properties" : {
+    "from" : {
+      "$ref" : "#/components/schemas/SeriesQueryRequest_from"
+    },
+    "until" : {
+      "$ref" : "#/components/schemas/SeriesQueryRequest_from"
+    },
+    "window" : {
+      "$ref" : "#/components/schemas/SeriesQueryRequest_window"
+    },
+    "metric" : {
+      "$ref" : "#/components/schemas/MetricId"
+    },
+    "aggregates" : {
+      "maxItems" : 0,
+      "minItems" : 0,
+      "type" : "array",
+      "items" : { }
+    },
+    "resources" : {
+      "maxItems" : 1,
+      "minItems" : 1,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/ResourceId"
+      }
+    },
+    "maxResults" : {
+      "minimum" : 0,
+      "type" : "integer"
+    },
+    "filter" : {
+      "$ref" : "#/components/schemas/TimeseriesFilter"
+    },
+    "order" : {
+      "$ref" : "#/components/schemas/Order"
+    }
+  }
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({
+    "SeriesQueryWithoutAggregatesRequest": _series_query_without_aggregates_request_model_schema
+})
 
 _ttl_duration_model_schema = json.loads(
     r"""{

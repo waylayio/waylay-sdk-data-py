@@ -28,6 +28,7 @@ docs/MessageQueryResultResultsInner.md
 docs/MessageQueryUntil.md
 docs/MessageQueryWindow.md
 docs/MessagesApi.md
+docs/MultipleSeriesQueryRequestInner.md
 docs/ObjectData.md
 docs/Operation.md
 docs/Order.md
@@ -48,6 +49,7 @@ docs/SeriesQueryRequest.md
 docs/SeriesQueryRequestFrom.md
 docs/SeriesQueryRequestWindow.md
 docs/SeriesQueryResponse.md
+docs/SeriesQueryWithoutAggregatesRequest.md
 docs/TTLDuration.md
 docs/TimeseriesFilter.md
 docs/TimeseriesFilterOperator.md
@@ -93,6 +95,7 @@ test/types/message_query_result_stub.py
 test/types/message_query_stub.py
 test/types/message_query_until_stub.py
 test/types/message_query_window_stub.py
+test/types/multiple_series_query_request_inner_stub.py
 test/types/object_data_stub.py
 test/types/order_stub.py
 test/types/post_series_for_resource_request_stub.py
@@ -111,6 +114,7 @@ test/types/series_query_request_from_stub.py
 test/types/series_query_request_stub.py
 test/types/series_query_request_window_stub.py
 test/types/series_query_response_stub.py
+test/types/series_query_without_aggregates_request_stub.py
 test/types/timeseries_filter_operator_operator_stub.py
 test/types/timeseries_filter_operator_stub.py
 test/types/timeseries_filter_stub.py

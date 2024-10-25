@@ -23,6 +23,7 @@ src/waylay/services/data/models/message_query_result.py
 src/waylay/services/data/models/message_query_result_results_inner.py
 src/waylay/services/data/models/message_query_until.py
 src/waylay/services/data/models/message_query_window.py
+src/waylay/services/data/models/multiple_series_query_request_inner.py
 src/waylay/services/data/models/object.py
 src/waylay/services/data/models/object_data.py
 src/waylay/services/data/models/order.py
@@ -43,6 +44,7 @@ src/waylay/services/data/models/series_query_request.py
 src/waylay/services/data/models/series_query_request_from.py
 src/waylay/services/data/models/series_query_request_window.py
 src/waylay/services/data/models/series_query_response.py
+src/waylay/services/data/models/series_query_without_aggregates_request.py
 src/waylay/services/data/models/timeseries_filter.py
 src/waylay/services/data/models/timeseries_filter_operator.py
 src/waylay/services/data/models/timeseries_filter_operator_operator.py

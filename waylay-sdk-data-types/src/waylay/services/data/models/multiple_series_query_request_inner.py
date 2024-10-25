@@ -19,8 +19,13 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.object_data import ObjectData
-from ..models.scalar_data import ScalarData
+from ..models.series_query_request import SeriesQueryRequest
+from ..models.series_query_without_aggregates_request import (
+    SeriesQueryWithoutAggregatesRequest,
+)
 
-Measurements = Union[Annotated[ScalarData, ""], Annotated[ObjectData, ""]]
-"""Values in an _Event_ payload. Note that only _scalar_ data is stored in the timeseries, while Arrays and objects are only stored in the _Message Cache_.."""
+MultipleSeriesQueryRequestInner = Union[
+    Annotated[SeriesQueryRequest, ""],
+    Annotated[SeriesQueryWithoutAggregatesRequest, ""],
+]
+"""MultipleSeriesQueryRequestInner."""

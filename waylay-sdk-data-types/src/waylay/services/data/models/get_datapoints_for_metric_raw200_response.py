@@ -20,6 +20,7 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.11
 )
+
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.get_datapoints_for_metric_raw200_response_links import (

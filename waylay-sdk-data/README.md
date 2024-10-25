@@ -2,7 +2,7 @@
 Data is ingested into the platform by the Waylay Broker.
 
 This Python package is automatically generated based on the 
-Waylay Data OpenAPI specification (API version: 2.14.0)
+Waylay Data OpenAPI specification (API version: 2.18.0)
 For more information, please visit [the openapi specification](https://docs.waylay.io/openapi/public/redocly/data.html).
 
 It consists of a plugin for the waylay-sdk-core package, and contains the Data api methods.

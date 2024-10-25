@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Waylay Broker
-  version: 2.14.0
+  version: 2.18.0
   description: Data is ingested into the platform by the Waylay Broker.
 servers:
   - url: https://api.waylay.io
@@ -523,6 +523,7 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/SeriesQueryRequest'
+                - $ref: '#/components/schemas/SeriesQueryWithoutAggregatesRequest'
                 - $ref: '#/components/schemas/MultipleSeriesQueryRequest'
       responses:
         '200':
@@ -982,11 +983,51 @@ components:
         - metric
         - aggregates
         - resources
+    SeriesQueryWithoutAggregatesRequest:
+      type: object
+      properties:
+        from:
+          oneOf:
+            - $ref: '#/components/schemas/UnixEpochMillis'
+            - $ref: '#/components/schemas/SO8601Timestamp'
+        until:
+          oneOf:
+            - $ref: '#/components/schemas/UnixEpochMillis'
+            - $ref: '#/components/schemas/SO8601Timestamp'
+        window:
+          oneOf:
+            - $ref: '#/components/schemas/DurationWithUnit'
+            - $ref: '#/components/schemas/SO8601Duration'
+        metric:
+          $ref: '#/components/schemas/MetricId'
+        aggregates:
+          type: array
+          minItems: 0
+          maxItems: 0
+          items: {}
+        resources:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            $ref: '#/components/schemas/ResourceId'
+        maxResults:
+          type: integer
+          minimum: 0
+        filter:
+          $ref: '#/components/schemas/TimeseriesFilter'
+        order:
+          $ref: '#/components/schemas/Order'
+      required:
+        - metric
+        - resources
     MultipleSeriesQueryRequest:
       type: array
       minItems: 1
       items:
-        $ref: '#/components/schemas/SeriesQueryRequest'
+        oneOf:
+          - $ref: '#/components/schemas/SeriesQueryRequest'
+          - $ref: '#/components/schemas/SeriesQueryWithoutAggregatesRequest'
     SeriesKeyValue:
       type: array
       description: >-

@@ -16,16 +16,20 @@ from pydantic import TypeAdapter
 from ..openapi import MODEL_DEFINITIONS, with_example_provider
 
 try:
-    from waylay.services.data.models.series_query_request import SeriesQueryRequest
+    from waylay.services.data.models.series_query_without_aggregates_request import (
+        SeriesQueryWithoutAggregatesRequest,
+    )
 
-    SeriesQueryRequestAdapter = TypeAdapter(SeriesQueryRequest)
+    SeriesQueryWithoutAggregatesRequestAdapter = TypeAdapter(
+        SeriesQueryWithoutAggregatesRequest
+    )
     MODELS_AVAILABLE = True
 except ImportError as exc:
     MODELS_AVAILABLE = False
 
-series_query_request_model_schema = json.loads(
+series_query_without_aggregates_request_model_schema = json.loads(
     r"""{
-  "required" : [ "aggregates", "metric", "resources" ],
+  "required" : [ "metric", "resources" ],
   "type" : "object",
   "properties" : {
     "from" : {
@@ -41,16 +45,13 @@ series_query_request_model_schema = json.loads(
       "$ref" : "#/components/schemas/MetricId"
     },
     "aggregates" : {
-      "minItems" : 1,
+      "maxItems" : 0,
+      "minItems" : 0,
       "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/Aggregate"
-      }
-    },
-    "grouping" : {
-      "$ref" : "#/components/schemas/Grouping"
+      "items" : { }
     },
     "resources" : {
+      "maxItems" : 1,
       "minItems" : 1,
       "type" : "array",
       "items" : {
@@ -72,33 +73,38 @@ series_query_request_model_schema = json.loads(
 """,
     object_hook=with_example_provider,
 )
-series_query_request_model_schema.update({"definitions": MODEL_DEFINITIONS})
+series_query_without_aggregates_request_model_schema.update({
+    "definitions": MODEL_DEFINITIONS
+})
 
-series_query_request_faker = JSF(
-    series_query_request_model_schema, allow_none_optionals=1
+series_query_without_aggregates_request_faker = JSF(
+    series_query_without_aggregates_request_model_schema, allow_none_optionals=1
 )
 
 
-class SeriesQueryRequestStub:
-    """SeriesQueryRequest unit test stubs."""
+class SeriesQueryWithoutAggregatesRequestStub:
+    """SeriesQueryWithoutAggregatesRequest unit test stubs."""
 
     @classmethod
     def create_json(cls):
         """Create a dict stub instance."""
-        return series_query_request_faker.generate(use_defaults=True, use_examples=True)
+        return series_query_without_aggregates_request_faker.generate(
+            use_defaults=True, use_examples=True
+        )
 
     @classmethod
-    def create_instance(cls) -> "SeriesQueryRequest":
-        """Create SeriesQueryRequest stub instance."""
+    def create_instance(cls) -> "SeriesQueryWithoutAggregatesRequest":
+        """Create SeriesQueryWithoutAggregatesRequest stub instance."""
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
         json = cls.create_json()
         if json is None:
             # use backup example based on the pydantic model schema
             backup_faker = JSF(
-                SeriesQueryRequestAdapter.json_schema(), allow_none_optionals=1
+                SeriesQueryWithoutAggregatesRequestAdapter.json_schema(),
+                allow_none_optionals=1,
             )
             json = backup_faker.generate(use_defaults=True, use_examples=True)
-        return SeriesQueryRequestAdapter.validate_python(
+        return SeriesQueryWithoutAggregatesRequestAdapter.validate_python(
             json, context={"skip_validation": True}
         )

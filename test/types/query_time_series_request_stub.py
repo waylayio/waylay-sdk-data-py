@@ -30,6 +30,8 @@ query_time_series_request_model_schema = json.loads(
   "oneOf" : [ {
     "$ref" : "#/components/schemas/SeriesQueryRequest"
   }, {
+    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
+  }, {
     "$ref" : "#/components/schemas/MultipleSeriesQueryRequest"
   } ]
 }
@@ -59,7 +61,7 @@ class QueryTimeSeriesRequestStub:
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
         json = cls.create_json()
-        if not json:
+        if json is None:
             # use backup example based on the pydantic model schema
             backup_faker = JSF(
                 QueryTimeSeriesRequestAdapter.json_schema(), allow_none_optionals=1
