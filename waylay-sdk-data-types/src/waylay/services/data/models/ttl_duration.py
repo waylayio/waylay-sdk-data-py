@@ -15,9 +15,7 @@ from typing import (
     Union,
 )
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 TTLDuration = Union[
     Annotated[int, "Number of seconds of a time interval."],

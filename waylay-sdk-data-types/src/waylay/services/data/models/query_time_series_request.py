@@ -16,9 +16,7 @@ from typing import (
     Union,
 )
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 from ..models.multiple_series_query_request_inner import MultipleSeriesQueryRequestInner
 from ..models.series_query_request import SeriesQueryRequest

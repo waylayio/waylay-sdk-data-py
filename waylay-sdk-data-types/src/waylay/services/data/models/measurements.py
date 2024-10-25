@@ -15,9 +15,7 @@ from typing import (
     Union,
 )
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 from ..models.object_data import ObjectData
 from ..models.scalar_data import ScalarData

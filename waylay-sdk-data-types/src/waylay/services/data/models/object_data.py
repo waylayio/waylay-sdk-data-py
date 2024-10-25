@@ -16,9 +16,7 @@ from typing import (
     Union,
 )
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 ObjectData = Union[Annotated[object, ""], Annotated[List[Measurements], ""]]
 """Event data stored only in the _Message Cache_.."""
