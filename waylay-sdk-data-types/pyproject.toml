@@ -12,7 +12,7 @@ authors = [
 keywords = ["Waylay Broker" , "Types"]
 requires-python = ">= 3.9"
 dependencies = [
-    "waylay-sdk-core ~= 0.2.4",
+    "waylay-sdk-core ~= 0.3.2",
     "waylay-sdk-data == 2.18.0.20241025",
     "pydantic ~= 2.6",
     "typing-extensions ~= 4.10",
