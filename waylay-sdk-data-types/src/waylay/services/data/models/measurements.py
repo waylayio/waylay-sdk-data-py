@@ -19,6 +19,7 @@ from typing_extensions import (
 
 from ..models.scalar_data import ScalarData
 
-ObjectData = Union[Annotated[object, ""], Annotated[List["Measurements"], ""]]
-Measurements = Union[Annotated[ScalarData, ""], Annotated[ObjectData, ""]]
+Measurements = Union[Annotated[ScalarData, ""], Annotated["ObjectData", ""]]
+ObjectData = Union[Annotated[object, ""], Annotated[List[Measurements], ""]]
+
 """Values in an _Event_ payload. Note that only _scalar_ data is stored in the timeseries, while Arrays and objects are only stored in the _Message Cache_.."""

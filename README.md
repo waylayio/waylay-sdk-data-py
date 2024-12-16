@@ -2,7 +2,7 @@
 Data is ingested into the platform by the Waylay Broker.
 
 This Python package is automatically generated based on the 
-Waylay Data OpenAPI specification (API version: 2.14.0)
+Waylay Data OpenAPI specification (API version: 2.18.0)
 For more information, please visit [the openapi specification](https://docs.waylay.io/openapi/public/redocly/data.html).
 
 It consists of two sub-packages that are both plugins for the waylay-sdk-core package.
@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
  - [MessageQueryResultResultsInner](docs/MessageQueryResultResultsInner.md)
  - [MessageQueryUntil](docs/MessageQueryUntil.md)
  - [MessageQueryWindow](docs/MessageQueryWindow.md)
+ - [MultipleSeriesQueryRequestInner](docs/MultipleSeriesQueryRequestInner.md)
  - [ObjectData](docs/ObjectData.md)
  - [Order](docs/Order.md)
  - [PostSeriesForResourceRequest](docs/PostSeriesForResourceRequest.md)
@@ -118,6 +119,7 @@ Class | Method | HTTP request | Description
  - [SeriesQueryRequestFrom](docs/SeriesQueryRequestFrom.md)
  - [SeriesQueryRequestWindow](docs/SeriesQueryRequestWindow.md)
  - [SeriesQueryResponse](docs/SeriesQueryResponse.md)
+ - [SeriesQueryWithoutAggregatesRequest](docs/SeriesQueryWithoutAggregatesRequest.md)
  - [TTLDuration](docs/TTLDuration.md)
  - [TimeseriesFilter](docs/TimeseriesFilter.md)
  - [TimeseriesFilterOperator](docs/TimeseriesFilterOperator.md)

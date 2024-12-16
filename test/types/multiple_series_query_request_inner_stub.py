@@ -16,65 +16,61 @@ from pydantic import TypeAdapter
 from ..openapi import MODEL_DEFINITIONS, with_example_provider
 
 try:
-    from waylay.services.data.models.get_series200_response_inner_latest import (
-        GetSeries200ResponseInnerLatest,
+    from waylay.services.data.models.multiple_series_query_request_inner import (
+        MultipleSeriesQueryRequestInner,
     )
 
-    GetSeries200ResponseInnerLatestAdapter = TypeAdapter(
-        GetSeries200ResponseInnerLatest
+    MultipleSeriesQueryRequestInnerAdapter = TypeAdapter(
+        MultipleSeriesQueryRequestInner
     )
     MODELS_AVAILABLE = True
 except ImportError as exc:
     MODELS_AVAILABLE = False
 
-get_series_200_response_inner_latest_model_schema = json.loads(
+multiple_series_query_request_inner_model_schema = json.loads(
     r"""{
-  "required" : [ "timestamp" ],
-  "type" : "object",
-  "properties" : {
-    "timestamp" : {
-      "$ref" : "#/components/schemas/UnixEpochMillis"
-    },
-    "value" : {
-      "$ref" : "#/components/schemas/ScalarData"
-    }
-  }
+  "title" : "MultipleSeriesQueryRequest_inner",
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/SeriesQueryRequest"
+  }, {
+    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
+  } ]
 }
 """,
     object_hook=with_example_provider,
 )
-get_series_200_response_inner_latest_model_schema.update({
+multiple_series_query_request_inner_model_schema.update({
     "definitions": MODEL_DEFINITIONS
 })
 
-get_series_200_response_inner_latest_faker = JSF(
-    get_series_200_response_inner_latest_model_schema, allow_none_optionals=1
+multiple_series_query_request_inner_faker = JSF(
+    multiple_series_query_request_inner_model_schema, allow_none_optionals=1
 )
 
 
-class GetSeries200ResponseInnerLatestStub:
-    """GetSeries200ResponseInnerLatest unit test stubs."""
+class MultipleSeriesQueryRequestInnerStub:
+    """MultipleSeriesQueryRequestInner unit test stubs."""
 
     @classmethod
     def create_json(cls):
         """Create a dict stub instance."""
-        return get_series_200_response_inner_latest_faker.generate(
+        return multiple_series_query_request_inner_faker.generate(
             use_defaults=True, use_examples=True
         )
 
     @classmethod
-    def create_instance(cls) -> "GetSeries200ResponseInnerLatest":
-        """Create GetSeries200ResponseInnerLatest stub instance."""
+    def create_instance(cls) -> "MultipleSeriesQueryRequestInner":
+        """Create MultipleSeriesQueryRequestInner stub instance."""
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
         json = cls.create_json()
         if json is None:
             # use backup example based on the pydantic model schema
             backup_faker = JSF(
-                GetSeries200ResponseInnerLatestAdapter.json_schema(),
+                MultipleSeriesQueryRequestInnerAdapter.json_schema(),
                 allow_none_optionals=1,
             )
             json = backup_faker.generate(use_defaults=True, use_examples=True)
-        return GetSeries200ResponseInnerLatestAdapter.validate_python(
+        return MultipleSeriesQueryRequestInnerAdapter.validate_python(
             json, context={"skip_validation": True}
         )

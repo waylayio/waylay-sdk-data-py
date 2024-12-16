@@ -3,7 +3,7 @@
 
 This code was generated from the OpenAPI documentation of 'Waylay Broker'
 
-version: 2.14.0
+version: 2.18.0
 
 Data is ingested into the platform by the Waylay Broker.
 

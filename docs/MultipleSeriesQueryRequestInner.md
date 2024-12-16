@@ -1,4 +1,4 @@
-# QueryTimeSeriesRequest
+# MultipleSeriesQueryRequestInner
 
 
 ## Properties
@@ -19,19 +19,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from waylay.services.data.models.query_time_series_request import QueryTimeSeriesRequest
+from waylay.services.data.models.multiple_series_query_request_inner import MultipleSeriesQueryRequestInner
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of QueryTimeSeriesRequest from a JSON string
-query_time_series_request_instance = QueryTimeSeriesRequest.from_json(json)
+# create an instance of MultipleSeriesQueryRequestInner from a JSON string
+multiple_series_query_request_inner_instance = MultipleSeriesQueryRequestInner.from_json(json)
 # print the JSON string representation of the object
-print QueryTimeSeriesRequest.to_json()
+print MultipleSeriesQueryRequestInner.to_json()
 
 # convert the object into a dict
-query_time_series_request_dict = query_time_series_request_instance.to_dict()
-# create an instance of QueryTimeSeriesRequest from a dict
-query_time_series_request_form_dict = query_time_series_request.from_dict(query_time_series_request_dict)
+multiple_series_query_request_inner_dict = multiple_series_query_request_inner_instance.to_dict()
+# create an instance of MultipleSeriesQueryRequestInner from a dict
+multiple_series_query_request_inner_form_dict = multiple_series_query_request_inner.from_dict(multiple_series_query_request_inner_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

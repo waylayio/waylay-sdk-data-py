@@ -12,7 +12,6 @@ Do not edit the class manually.
 from __future__ import annotations
 
 from typing import (
-    List,
     Union,
 )
 
@@ -20,15 +19,13 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.multiple_series_query_request_inner import MultipleSeriesQueryRequestInner
 from ..models.series_query_request import SeriesQueryRequest
 from ..models.series_query_without_aggregates_request import (
     SeriesQueryWithoutAggregatesRequest,
 )
 
-QueryTimeSeriesRequest = Union[
+MultipleSeriesQueryRequestInner = Union[
     Annotated[SeriesQueryRequest, ""],
     Annotated[SeriesQueryWithoutAggregatesRequest, ""],
-    Annotated[List[MultipleSeriesQueryRequestInner], ""],
 ]
-"""QueryTimeSeriesRequest."""
+"""MultipleSeriesQueryRequestInner."""

@@ -16,7 +16,7 @@ from pydantic import TypeAdapter
 from ..openapi import MODEL_DEFINITIONS, with_example_provider
 
 try:
-    from waylay.services.data.models.object_data import ObjectData
+    from waylay.services.data.models.measurements import ObjectData
 
     ObjectDataAdapter = TypeAdapter(ObjectData)
     MODELS_AVAILABLE = True
@@ -60,7 +60,7 @@ class ObjectDataStub:
         if not MODELS_AVAILABLE:
             raise ImportError("Models must be installed to create class stubs")
         json = cls.create_json()
-        if not json:
+        if json is None:
             # use backup example based on the pydantic model schema
             backup_faker = JSF(ObjectDataAdapter.json_schema(), allow_none_optionals=1)
             json = backup_faker.generate(use_defaults=True, use_examples=True)
