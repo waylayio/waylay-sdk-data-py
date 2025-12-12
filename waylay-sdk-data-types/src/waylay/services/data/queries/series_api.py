@@ -10,17 +10,17 @@ Do not edit the class manually.
 
 from __future__ import annotations  # for Python 3.7–3.9
 
-from typing import Any
+from typing import Any, List
 
 from pydantic import (
     ConfigDict,
     Field,
+    StrictBool,
     StrictStr,
 )
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.aggregate import Aggregate
@@ -32,6 +32,8 @@ def _delete_series_query_alias_for(field_name: str) -> str:
         return "from"
     if field_name == "until":
         return "until"
+    if field_name == "metrics":
+        return "Metrics"
     return field_name
 
 
@@ -43,6 +45,10 @@ class DeleteSeriesQuery(WaylayBaseModel):
     ] = None
     until: Annotated[
         Any | None, Field(description="Specifies the upper bound of the time period")
+    ] = None
+    metrics: Annotated[
+        Annotated[List[StrictStr], Field(min_length=1)] | None,
+        Field(description="If set, only these selected metrics are removed."),
     ] = None
 
     model_config = ConfigDict(
@@ -62,6 +68,8 @@ def _get_datapoints_for_metric_raw_query_alias_for(field_name: str) -> str:
         return "limit"
     if field_name == "order":
         return "order"
+    if field_name == "return_ingestion_timestamp":
+        return "returnIngestionTimestamp"
     return field_name
 
 
@@ -85,6 +93,12 @@ class GetDatapointsForMetricRawQuery(WaylayBaseModel):
         Field(description="max number of values to retrieve"),
     ] = None
     order: Annotated[Order | None, Field(description="sort order")] = None
+    return_ingestion_timestamp: Annotated[
+        StrictBool | None,
+        Field(
+            description="return metric ingestion timestamp from time series database."
+        ),
+    ] = None
 
     model_config = ConfigDict(
         protected_namespaces=(),
@@ -99,6 +113,8 @@ def _get_last_datapoints_for_metric_query_alias_for(field_name: str) -> str:
         return "limit"
     if field_name == "until":
         return "until"
+    if field_name == "return_ingestion_timestamp":
+        return "returnIngestionTimestamp"
     return field_name
 
 
@@ -112,7 +128,13 @@ class GetLastDatapointsForMetricQuery(WaylayBaseModel):
     until: Annotated[
         Any | None,
         Field(
-            description="Specifies the upper bound of the time period. If not specified, a period of 7 days after `from` (or before the request was received) will be queried"
+            description="Specifies the timestamp before which last values have to be retrieved. If not specified, defaults to the current timestamp."
+        ),
+    ] = None
+    return_ingestion_timestamp: Annotated[
+        StrictBool | None,
+        Field(
+            description="return metric ingestion timestamp from time series database."
         ),
     ] = None
 
@@ -125,11 +147,20 @@ class GetLastDatapointsForMetricQuery(WaylayBaseModel):
 
 
 def _get_last_metric_query_alias_for(field_name: str) -> str:
+    if field_name == "return_ingestion_timestamp":
+        return "returnIngestionTimestamp"
     return field_name
 
 
 class GetLastMetricQuery(WaylayBaseModel):
     """Model for `get_last_metric` query parameters."""
+
+    return_ingestion_timestamp: Annotated[
+        StrictBool | None,
+        Field(
+            description="return metric ingestion timestamp from time series database."
+        ),
+    ] = None
 
     model_config = ConfigDict(
         protected_namespaces=(),
@@ -152,6 +183,8 @@ def _get_metric_series_query_alias_for(field_name: str) -> str:
         return "grouping"
     if field_name == "order":
         return "order"
+    if field_name == "return_ingestion_timestamp":
+        return "returnIngestionTimestamp"
     return field_name
 
 
@@ -182,6 +215,12 @@ class GetMetricSeriesQuery(WaylayBaseModel):
         Field(description="time period over which timeseries data must be aggregates"),
     ] = None
     order: Annotated[Order | None, Field(description="sort order")] = None
+    return_ingestion_timestamp: Annotated[
+        StrictBool | None,
+        Field(
+            description="return metric ingestion timestamp from time series database."
+        ),
+    ] = None
 
     model_config = ConfigDict(
         protected_namespaces=(),
@@ -192,11 +231,20 @@ class GetMetricSeriesQuery(WaylayBaseModel):
 
 
 def _get_series_query_alias_for(field_name: str) -> str:
+    if field_name == "return_ingestion_timestamp":
+        return "returnIngestionTimestamp"
     return field_name
 
 
 class GetSeriesQuery(WaylayBaseModel):
     """Model for `get_series` query parameters."""
+
+    return_ingestion_timestamp: Annotated[
+        StrictBool | None,
+        Field(
+            description="return metric ingestion timestamp from time series database."
+        ),
+    ] = None
 
     model_config = ConfigDict(
         protected_namespaces=(),

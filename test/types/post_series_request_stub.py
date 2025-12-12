@@ -47,10 +47,7 @@ class PostSeriesRequestStub:
     @classmethod
     def create_json(cls):
         """Create a dict stub instance."""
-        return {
-            "resource": "myDemoThermo",
-            "temperature": 23
-        }
+        return post_series_request_faker.generate(use_defaults=True, use_examples=True)
 
     @classmethod
     def create_instance(cls) -> "PostSeriesRequest":

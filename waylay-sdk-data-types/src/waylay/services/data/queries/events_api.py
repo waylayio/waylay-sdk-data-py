@@ -10,17 +10,17 @@ Do not edit the class manually.
 
 from __future__ import annotations  # for Python 3.7–3.9
 
-from typing import Any
+from typing import Any, List
 
 from pydantic import (
     ConfigDict,
     Field,
     StrictBool,
+    StrictStr,
 )
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 
@@ -111,6 +111,8 @@ def _remove_query_alias_for(field_name: str) -> str:
         return "until"
     if field_name == "onlytimeseries":
         return "onlytimeseries"
+    if field_name == "metrics":
+        return "Metrics"
     return field_name
 
 
@@ -126,6 +128,10 @@ class RemoveQuery(WaylayBaseModel):
     onlytimeseries: Annotated[
         StrictBool | None,
         Field(description="if set to `true` will only delete timeseries data"),
+    ] = None
+    metrics: Annotated[
+        Annotated[List[StrictStr], Field(min_length=1)] | None,
+        Field(description="If set, only these selected metrics are removed."),
     ] = None
 
     model_config = ConfigDict(

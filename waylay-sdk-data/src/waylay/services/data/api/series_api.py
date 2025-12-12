@@ -29,7 +29,6 @@ from pydantic import (
 from typing_extensions import (
     Annotated,  # >=3.9,
 )
-
 from waylay.sdk.api import (
     HeaderTypes,
     QueryParamTypes,
@@ -237,6 +236,8 @@ class SeriesApi(WithApiClient):
         :type query['from']: DeleteSeriesFromParameter
         :param query['until'] (dict) <br> query.until (Query) : Specifies the upper bound of the time period
         :type query['until']: DeleteSeriesFromParameter
+        :param query['Metrics'] (dict) <br> query.metrics (Query) : If set, only these selected metrics are removed.
+        :type query['Metrics']: List[str]
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.
@@ -427,6 +428,8 @@ class SeriesApi(WithApiClient):
         :type query['limit']: int
         :param query['order'] (dict) <br> query.order (Query) : sort order
         :type query['order']: Order
+        :param query['returnIngestionTimestamp'] (dict) <br> query.return_ingestion_timestamp (Query) : return metric ingestion timestamp from time series database.
+        :type query['returnIngestionTimestamp']: bool
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.
@@ -612,8 +615,10 @@ class SeriesApi(WithApiClient):
         :type query: GetLastDatapointsForMetricQuery | QueryParamTypes, optional
         :param query['limit'] (dict) <br> query.limit (Query) : max number of values to retrieve
         :type query['limit']: int
-        :param query['until'] (dict) <br> query.until (Query) : Specifies the upper bound of the time period. If not specified, a period of 7 days after `from` (or before the request was received) will be queried
+        :param query['until'] (dict) <br> query.until (Query) : Specifies the timestamp before which last values have to be retrieved. If not specified, defaults to the current timestamp.
         :type query['until']: GetMetricSeriesFromParameter
+        :param query['returnIngestionTimestamp'] (dict) <br> query.return_ingestion_timestamp (Query) : return metric ingestion timestamp from time series database.
+        :type query['returnIngestionTimestamp']: bool
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.
@@ -797,6 +802,8 @@ class SeriesApi(WithApiClient):
         :type metric: str
         :param query: URL Query parameters.
         :type query: GetLastMetricQuery | QueryParamTypes, optional
+        :param query['returnIngestionTimestamp'] (dict) <br> query.return_ingestion_timestamp (Query) : return metric ingestion timestamp from time series database.
+        :type query['returnIngestionTimestamp']: bool
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.
@@ -992,6 +999,8 @@ class SeriesApi(WithApiClient):
         :type query['grouping']: Grouping
         :param query['order'] (dict) <br> query.order (Query) : sort order
         :type query['order']: Order
+        :param query['returnIngestionTimestamp'] (dict) <br> query.return_ingestion_timestamp (Query) : return metric ingestion timestamp from time series database.
+        :type query['returnIngestionTimestamp']: bool
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.
@@ -1155,6 +1164,8 @@ class SeriesApi(WithApiClient):
         :type resource_id: str
         :param query: URL Query parameters.
         :type query: GetSeriesQuery | QueryParamTypes, optional
+        :param query['returnIngestionTimestamp'] (dict) <br> query.return_ingestion_timestamp (Query) : return metric ingestion timestamp from time series database.
+        :type query['returnIngestionTimestamp']: bool
         :param raw_response: If true, return the http Response object instead of returning an api model object, or throwing an ApiError.
         :param select_path: Denotes the json path applied to the response object before returning it.
                 Set it to the empty string `""` to receive the full response object.

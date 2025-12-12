@@ -16,7 +16,6 @@ from pydantic import (
     Field,
     StrictStr,
 )
-
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.get_series200_response_inner_latest import GetSeries200ResponseInnerLatest

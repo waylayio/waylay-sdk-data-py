@@ -23,7 +23,6 @@ from pydantic import (
     StrictBool,
     TypeAdapter,
 )
-
 from waylay.sdk.api import (
     HeaderTypes,
     QueryParamTypes,

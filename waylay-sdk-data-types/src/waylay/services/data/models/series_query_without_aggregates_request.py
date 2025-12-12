@@ -16,12 +16,12 @@ from typing import Any, List
 from pydantic import (
     ConfigDict,
     Field,
+    StrictBool,
     StrictStr,
 )
 from typing_extensions import (
     Annotated,  # >=3.11
 )
-
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.order import Order
@@ -46,6 +46,9 @@ class SeriesQueryWithoutAggregatesRequest(WaylayBaseModel):
     )
     filter: TimeseriesFilter | None = None
     order: Order | None = Order.ASCENDING
+    return_ingestion_timestamp: StrictBool | None = Field(
+        default=False, alias="returnIngestionTimestamp"
+    )
 
     model_config = ConfigDict(
         populate_by_name=True, protected_namespaces=(), extra="ignore"

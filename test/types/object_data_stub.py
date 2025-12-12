@@ -16,7 +16,7 @@ from pydantic import TypeAdapter
 from ..openapi import MODEL_DEFINITIONS, with_example_provider
 
 try:
-    from waylay.services.data.models.measurements import ObjectData
+    from waylay.services.data.models.object_data import ObjectData
 
     ObjectDataAdapter = TypeAdapter(ObjectData)
     MODELS_AVAILABLE = True

@@ -199,6 +199,7 @@ paths:
       - Series
       parameters:
       - $ref: '#/components/parameters/ResourceId'
+      - $ref: '#/components/parameters/ReturnIngestionTimestamp'
       responses:
         '200':
           description: Successful Response
@@ -233,6 +234,7 @@ paths:
       - $ref: '#/components/parameters/ResourceId'
       - $ref: '#/components/parameters/From'
       - $ref: '#/components/parameters/Until'
+      - $ref: '#/components/parameters/MetricsToDelete'
       responses:
         '200':
           $ref: '#/components/responses/MessageSuccessResponse'
@@ -267,6 +269,7 @@ paths:
       - $ref: '#/components/parameters/Aggregates'
       - $ref: '#/components/parameters/Grouping'
       - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/ReturnIngestionTimestamp'
       responses:
         '200':
           description: Successful Response
@@ -287,6 +290,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/ResourceId'
       - $ref: '#/components/parameters/Metric'
+      - $ref: '#/components/parameters/ReturnIngestionTimestamp'
       responses:
         '200':
           description: Successful Response
@@ -313,7 +317,8 @@ paths:
       - $ref: '#/components/parameters/ResourceId'
       - $ref: '#/components/parameters/Metric'
       - $ref: '#/components/parameters/Limit'
-      - $ref: '#/components/parameters/SeriesQueryUntil'
+      - $ref: '#/components/parameters/SeriesLastUntil'
+      - $ref: '#/components/parameters/ReturnIngestionTimestamp'
       responses:
         '200':
           description: Successful Response
@@ -341,6 +346,7 @@ paths:
       - $ref: '#/components/parameters/SeriesQueryUntil'
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/ReturnIngestionTimestamp'
       responses:
         '200':
           description: Successful Response
@@ -410,6 +416,7 @@ paths:
       - $ref: '#/components/parameters/From'
       - $ref: '#/components/parameters/Until'
       - $ref: '#/components/parameters/OnlyTimeseries'
+      - $ref: '#/components/parameters/MetricsToDelete'
       responses:
         '200':
           $ref: '#/components/responses/MessageSuccessResponse'
@@ -802,6 +809,10 @@ components:
       enum:
       - ascending
       - descending
+    ReturnIngestionTimestamp:
+      title: return metric ingestion timestamp from time series database
+      type: boolean
+      default: false
     SeriesQueryRequest:
       title: Timeseries query request object
       type: object
@@ -839,6 +850,8 @@ components:
           $ref: '#/components/schemas/TimeseriesFilter'
         order:
           $ref: '#/components/schemas/Order'
+        returnIngestionTimestamp:
+          $ref: '#/components/schemas/ReturnIngestionTimestamp'
       required:
       - metric
       - aggregates
@@ -878,6 +891,8 @@ components:
           $ref: '#/components/schemas/TimeseriesFilter'
         order:
           $ref: '#/components/schemas/Order'
+        returnIngestionTimestamp:
+          $ref: '#/components/schemas/ReturnIngestionTimestamp'
       required:
       - metric
       - resources
@@ -1072,6 +1087,15 @@ components:
       schema:
         type: boolean
         default: false
+    MetricsToDelete:
+      name: Metrics
+      in: query
+      description: If set, only these selected metrics are removed.
+      schema:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/components/schemas/MetricId'
     SeriesQueryFrom:
       name: from
       in: query
@@ -1092,6 +1116,17 @@ components:
 
         If not specified, a period of 7 days after `from` (or before the request was
         received) will be queried'
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/UnixEpochMillis'
+        - $ref: '#/components/schemas/ISO8601Timestamp'
+    SeriesLastUntil:
+      name: until
+      in: query
+      example: 1665705600000
+      description: 'Specifies the timestamp before which last values have to be retrieved.
+
+        If not specified, defaults to the current timestamp.'
       schema:
         anyOf:
         - $ref: '#/components/schemas/UnixEpochMillis'
@@ -1133,6 +1168,12 @@ components:
       description: sort order
       schema:
         $ref: '#/components/schemas/Order'
+    ReturnIngestionTimestamp:
+      name: returnIngestionTimestamp
+      in: query
+      description: return metric ingestion timestamp from time series database.
+      schema:
+        $ref: '#/components/schemas/ReturnIngestionTimestamp'
   securitySchemes:
     waylayApiKeySecret:
       type: http

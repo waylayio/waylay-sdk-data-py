@@ -12,6 +12,7 @@ Do not edit the class manually.
 from __future__ import annotations
 
 from typing import (
+    List,
     Union,
 )
 
@@ -19,8 +20,5 @@ from typing_extensions import (
     Annotated,  # >=3.9
 )
 
-from ..models.object_data import ObjectData
-from ..models.scalar_data import ScalarData
-
-Measurements = Union[Annotated[ScalarData, ""], Annotated[ObjectData, ""]]
-"""Values in an _Event_ payload. Note that only _scalar_ data is stored in the timeseries, while Arrays and objects are only stored in the _Message Cache_.."""
+ObjectData = Union[Annotated[object, ""], Annotated[List[Measurements], ""]]
+"""Event data stored only in the _Message Cache_.."""

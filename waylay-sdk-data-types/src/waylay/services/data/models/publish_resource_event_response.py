@@ -15,7 +15,6 @@ from pydantic import (
     ConfigDict,
     StrictStr,
 )
-
 from waylay.sdk.api._models import BaseModel as WaylayBaseModel
 
 from ..models.publish_resource_event_response_content import (
