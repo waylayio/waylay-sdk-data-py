@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **max_results** | **int** |  | [optional] 
 **filter** | [**TimeseriesFilter**](TimeseriesFilter.md) |  | [optional] 
 **order** | [**Order**](Order.md) |  | [optional] [default to Order.ASCENDING]
+**return_ingestion_timestamp** | **bool** |  | [optional] [default to False]
 
 ## Example
 

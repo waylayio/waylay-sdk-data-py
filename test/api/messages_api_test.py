@@ -11,7 +11,7 @@ Do not edit the class manually.
 import json
 import re
 from importlib.util import find_spec
-from typing import List, Union
+from typing import List
 from urllib.parse import quote
 
 import pytest
@@ -80,7 +80,7 @@ async def test_delete_messages(
     kwargs = {}
     _delete_messages_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.messages.delete_messages(resourceId, **kwargs)
-    check_type(resp, Union[DeleteMessages200Response,])
+    check_type(resp, DeleteMessages200Response)
 
 
 @pytest.mark.asyncio
@@ -131,7 +131,7 @@ async def test_get_latest_document(
         httpx_mock, gateway_url, quote(str(resourceId))
     )
     resp = await service.messages.get_latest_document(resourceId, **kwargs)
-    check_type(resp, Union[TimestampedEvent,])
+    check_type(resp, TimestampedEvent)
 
 
 @pytest.mark.asyncio
@@ -182,7 +182,7 @@ async def test_get_latest_messages(
         httpx_mock, gateway_url, quote(str(resourceId))
     )
     resp = await service.messages.get_latest_messages(resourceId, **kwargs)
-    check_type(resp, Union[List[TimestampedEvent],])
+    check_type(resp, List[TimestampedEvent])
 
 
 @pytest.mark.asyncio
@@ -229,7 +229,7 @@ async def test_query_messages(
     }
     _query_messages_set_mock_response(httpx_mock, gateway_url)
     resp = await service.messages.query_messages(**kwargs)
-    check_type(resp, Union[MessageQueryResult,])
+    check_type(resp, MessageQueryResult)
 
 
 @pytest.mark.asyncio

@@ -66,6 +66,9 @@ series_query_request_model_schema = json.loads(
     },
     "order" : {
       "$ref" : "#/components/schemas/Order"
+    },
+    "returnIngestionTimestamp" : {
+      "$ref" : "#/components/schemas/ReturnIngestionTimestamp"
     }
   }
 }

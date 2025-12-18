@@ -11,7 +11,7 @@ Do not edit the class manually.
 import json
 import re
 from importlib.util import find_spec
-from typing import List, Union
+from typing import List
 from urllib.parse import quote
 
 import pytest
@@ -50,7 +50,9 @@ if MODELS_AVAILABLE:
         DeleteSeriesQuery,
         GetDatapointsForMetricRawQuery,
         GetLastDatapointsForMetricQuery,
+        GetLastMetricQuery,
         GetMetricSeriesQuery,
+        GetSeriesQuery,
     )
 
 
@@ -97,11 +99,12 @@ async def test_delete_series(
         "query": DeleteSeriesQuery(
             var_from=DeleteSeriesFromParameterStub.create_json(),
             until=DeleteSeriesFromParameterStub.create_json(),
+            metrics=["temperature"],
         ),
     }
     _delete_series_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.series.delete_series(resourceId, **kwargs)
-    check_type(resp, Union[DeleteMessages200Response,])
+    check_type(resp, DeleteMessages200Response)
 
 
 @pytest.mark.asyncio
@@ -119,6 +122,7 @@ async def test_delete_series_without_types(
         "query": {
             "from": DeleteSeriesFromParameterStub.create_json(),
             "until": DeleteSeriesFromParameterStub.create_json(),
+            "Metrics": ["temperature"],
         },
     }
     _delete_series_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
@@ -161,6 +165,7 @@ async def test_get_datapoints_for_metric_raw(
             until=GetMetricSeriesFromParameterStub.create_json(),
             limit=1,
             order="ascending",
+            return_ingestion_timestamp=False,
         ),
     }
     _get_datapoints_for_metric_raw_set_mock_response(
@@ -169,7 +174,7 @@ async def test_get_datapoints_for_metric_raw(
     resp = await service.series.get_datapoints_for_metric_raw(
         resourceId, metric, **kwargs
     )
-    check_type(resp, Union[TimeseriesJsonResult,])
+    check_type(resp, TimeseriesJsonResult)
 
 
 @pytest.mark.asyncio
@@ -191,6 +196,7 @@ async def test_get_datapoints_for_metric_raw_without_types(
             "until": GetMetricSeriesFromParameterStub.create_json(),
             "limit": 1,
             "order": "ascending",
+            "returnIngestionTimestamp": False,
         },
     }
     _get_datapoints_for_metric_raw_set_mock_response(
@@ -235,6 +241,7 @@ async def test_get_last_datapoints_for_metric(
         "query": GetLastDatapointsForMetricQuery(
             limit=1,
             until=GetMetricSeriesFromParameterStub.create_json(),
+            return_ingestion_timestamp=False,
         ),
     }
     _get_last_datapoints_for_metric_set_mock_response(
@@ -243,7 +250,7 @@ async def test_get_last_datapoints_for_metric(
     resp = await service.series.get_last_datapoints_for_metric(
         resourceId, metric, **kwargs
     )
-    check_type(resp, Union[TimeseriesJsonResult,])
+    check_type(resp, TimeseriesJsonResult)
 
 
 @pytest.mark.asyncio
@@ -263,6 +270,7 @@ async def test_get_last_datapoints_for_metric_without_types(
         "query": {
             "limit": 1,
             "until": GetMetricSeriesFromParameterStub.create_json(),
+            "returnIngestionTimestamp": False,
         },
     }
     _get_last_datapoints_for_metric_set_mock_response(
@@ -302,12 +310,17 @@ async def test_get_last_metric(
 
     metric = "metric_example"
 
-    kwargs = {}
+    kwargs = {
+        # optionally use GetLastMetricQuery to validate and reuse parameters
+        "query": GetLastMetricQuery(
+            return_ingestion_timestamp=False,
+        ),
+    }
     _get_last_metric_set_mock_response(
         httpx_mock, gateway_url, quote(str(resourceId)), quote(str(metric))
     )
     resp = await service.series.get_last_metric(resourceId, metric, **kwargs)
-    check_type(resp, Union[LatestMeasurement,])
+    check_type(resp, LatestMeasurement)
 
 
 @pytest.mark.asyncio
@@ -323,7 +336,11 @@ async def test_get_last_metric_without_types(
 
     metric = "metric_example"
 
-    kwargs = {}
+    kwargs = {
+        "query": {
+            "returnIngestionTimestamp": False,
+        },
+    }
     _get_last_metric_set_mock_response(
         httpx_mock, gateway_url, quote(str(resourceId)), quote(str(metric))
     )
@@ -368,13 +385,14 @@ async def test_get_metric_series(
             aggregates="min,max",
             grouping=GroupingStub.create_json(),
             order="ascending",
+            return_ingestion_timestamp=False,
         ),
     }
     _get_metric_series_set_mock_response(
         httpx_mock, gateway_url, quote(str(resourceId)), quote(str(metric))
     )
     resp = await service.series.get_metric_series(resourceId, metric, **kwargs)
-    check_type(resp, Union[TimeseriesJsonResult,])
+    check_type(resp, TimeseriesJsonResult)
 
 
 @pytest.mark.asyncio
@@ -398,6 +416,7 @@ async def test_get_metric_series_without_types(
             "aggregates": "min,max",
             "grouping": GroupingStub.create_json(),
             "order": "ascending",
+            "returnIngestionTimestamp": False,
         },
     }
     _get_metric_series_set_mock_response(
@@ -431,10 +450,15 @@ async def test_get_series(
     # set path params
     resourceId = "resource_id_example"
 
-    kwargs = {}
+    kwargs = {
+        # optionally use GetSeriesQuery to validate and reuse parameters
+        "query": GetSeriesQuery(
+            return_ingestion_timestamp=False,
+        ),
+    }
     _get_series_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.series.get_series(resourceId, **kwargs)
-    check_type(resp, Union[List[GetSeries200ResponseInner],])
+    check_type(resp, List[GetSeries200ResponseInner])
 
 
 @pytest.mark.asyncio
@@ -448,7 +472,11 @@ async def test_get_series_without_types(
     # set path params
     resourceId = "resource_id_example"
 
-    kwargs = {}
+    kwargs = {
+        "query": {
+            "returnIngestionTimestamp": False,
+        },
+    }
     _get_series_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.series.get_series(resourceId, **kwargs)
     check_type(resp, Model)
@@ -479,7 +507,7 @@ async def test_query_time_series(
     }
     _query_time_series_set_mock_response(httpx_mock, gateway_url)
     resp = await service.series.query_time_series(**kwargs)
-    check_type(resp, Union[QueryTimeSeries200Response,])
+    check_type(resp, QueryTimeSeries200Response)
 
 
 @pytest.mark.asyncio

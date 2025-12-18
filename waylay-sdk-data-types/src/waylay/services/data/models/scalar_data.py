@@ -15,9 +15,7 @@ from typing import (
     Union,
 )
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 ScalarData = Union[Annotated[float, ""], Annotated[str, ""], Annotated[bool, ""]]
 """Event data stored in both the _Message Cache_ and _Time Series Database_. Keys of these measurements become a _Metric_ for the resource.."""

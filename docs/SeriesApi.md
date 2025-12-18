@@ -64,6 +64,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
 **query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
 **query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
+**query['Metrics']** (dict) <br> **query.metrics** (Query) | [**List[str]**](str.md) | query parameter `"Metrics"` | If set, only these selected metrics are removed. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -146,6 +147,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
 **query['limit']** (dict) <br> **query.limit** (Query) | **int** | query parameter `"limit"` | max number of values to retrieve | [optional] [default 1]
 **query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
+**query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -224,7 +226,8 @@ Name     | Type  | API binding   | Description   | Notes
 **metric** | **str** | path parameter `"metric"` | Identifies the times series metric. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
 **query['limit']** (dict) <br> **query.limit** (Query) | **int** | query parameter `"limit"` | max number of values to retrieve | [optional] [default 1]
-**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the timestamp before which last values have to be retrieved. If not specified, defaults to the current timestamp. | [optional] 
+**query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -253,6 +256,7 @@ str | False _(default)_ | **`Any`** | If any other string value for the selected
 > get_last_metric(
 > resource_id: str,
 > metric: str,
+> query: GetLastMetricQuery,
 > headers
 > ) -> LatestMeasurement
 
@@ -280,6 +284,9 @@ try:
     api_response = await waylay_client.data.series.get_last_metric(
         'resource_id_example', # resource_id | path param "resourceId"
         'metric_example', # metric | path param "metric"
+        # query parameters:
+        query = {
+        },
     )
     print("The response of data.series.get_last_metric:\n")
     pprint(api_response)
@@ -297,6 +304,8 @@ Name     | Type  | API binding   | Description   | Notes
 -------- | ----- | ------------- | ------------- | -------------
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
 **metric** | **str** | path parameter `"metric"` | Identifies the times series metric. | 
+**query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
+**query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -382,6 +391,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query['aggregates']** (dict) <br> **query.aggregates** (Query) | **str** | query parameter `"aggregates"` | comma-separated list of aggregation functions | [optional] 
 **query['grouping']** (dict) <br> **query.grouping** (Query) | [**Grouping**](.md) | query parameter `"grouping"` | time period over which timeseries data must be aggregates | [optional] 
 **query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
+**query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -409,6 +419,7 @@ str | False _(default)_ | **`Any`** | If any other string value for the selected
 # **get_series**
 > get_series(
 > resource_id: str,
+> query: GetSeriesQuery,
 > headers
 > ) -> List[GetSeries200ResponseInner]
 
@@ -435,6 +446,9 @@ try:
     # calls `GET /data/v1/series/{resourceId}`
     api_response = await waylay_client.data.series.get_series(
         'resource_id_example', # resource_id | path param "resourceId"
+        # query parameters:
+        query = {
+        },
     )
     print("The response of data.series.get_series:\n")
     pprint(api_response)
@@ -451,6 +465,8 @@ GET /data/v1/series/{resourceId}
 Name     | Type  | API binding   | Description   | Notes
 -------- | ----- | ------------- | ------------- | -------------
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
+**query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
+**query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type

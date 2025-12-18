@@ -12,13 +12,9 @@ Do not edit the class manually.
 from __future__ import annotations
 
 from datetime import datetime
-from typing import (
-    Union,
-)
+from typing import Union
 
-from typing_extensions import (
-    Annotated,  # >=3.9
-)
+from typing_extensions import Annotated
 
 MessageQueryWindow = Union[
     Annotated[str, "Time interval with duration unit."], Annotated[datetime, ""]

@@ -9,7 +9,7 @@ It consists of a plugin for the waylay-sdk-core package, and contains the Data a
 Note that the typed model classes for all path params, query params, body params and responses for each of the api methods are contained in a separate package called waylay-sdk-data-types.
 
 ## Requirements.
-This package requires Python 3.9+.
+This package requires Python 3.10+.
 
 ## Installation
 

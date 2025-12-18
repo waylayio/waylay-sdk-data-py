@@ -221,6 +221,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
 **query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
 **query['onlytimeseries']** (dict) <br> **query.onlytimeseries** (Query) | **bool** | query parameter `"onlytimeseries"` | if set to &#x60;true&#x60; will only delete timeseries data | [optional] [default False]
+**query['Metrics']** (dict) <br> **query.metrics** (Query) | [**List[str]**](str.md) | query parameter `"Metrics"` | If set, only these selected metrics are removed. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type

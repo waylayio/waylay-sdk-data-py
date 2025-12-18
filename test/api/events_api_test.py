@@ -11,7 +11,7 @@ Do not edit the class manually.
 import json
 import re
 from importlib.util import find_spec
-from typing import AsyncIterator, Union, get_args
+from typing import AsyncIterator, get_args
 from urllib.parse import quote
 
 import pytest
@@ -98,7 +98,7 @@ async def test_post_series(
     }
     _post_series_set_mock_response(httpx_mock, gateway_url)
     resp = await service.events.post_series(**kwargs)
-    check_type(resp, Union[PublishEventResponse,])
+    check_type(resp, PublishEventResponse)
 
 
 @pytest.mark.asyncio
@@ -160,7 +160,7 @@ async def test_post_series_for_resource(
         httpx_mock, gateway_url, quote(str(resourceId))
     )
     resp = await service.events.post_series_for_resource(resourceId, **kwargs)
-    check_type(resp, Union[PublishResourceEventResponse,])
+    check_type(resp, PublishResourceEventResponse)
 
 
 @pytest.mark.asyncio
@@ -215,11 +215,12 @@ async def test_remove(service: DataService, gateway_url: str, httpx_mock: HTTPXM
             var_from=DeleteSeriesFromParameterStub.create_json(),
             until=DeleteSeriesFromParameterStub.create_json(),
             onlytimeseries=False,
+            metrics=["temperature"],
         ),
     }
     _remove_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.events.remove(resourceId, **kwargs)
-    check_type(resp, Union[DeleteMessages200Response,])
+    check_type(resp, DeleteMessages200Response)
 
 
 @pytest.mark.asyncio
@@ -238,6 +239,7 @@ async def test_remove_without_types(
             "from": DeleteSeriesFromParameterStub.create_json(),
             "until": DeleteSeriesFromParameterStub.create_json(),
             "onlytimeseries": False,
+            "Metrics": ["temperature"],
         },
     }
     _remove_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
@@ -273,9 +275,9 @@ async def test_stream_events(
     kwargs = {}
     _stream_events_set_mock_response(httpx_mock, gateway_url, quote(str(resourceId)))
     resp = await service.events.stream_events(resourceId, **kwargs)
-    check_type(resp, Union[AsyncIterator[TimestampedResourceEvent],])
+    check_type(resp, AsyncIterator[TimestampedResourceEvent])
     async for item in resp:
-        check_type(item, get_args(Union[AsyncIterator[TimestampedResourceEvent],])[0])
+        check_type(item, get_args(AsyncIterator[TimestampedResourceEvent])[0])
         break  # Test only the first value
 
 
