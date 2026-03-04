@@ -1,28 +1,30 @@
 # Grouping
 
 
-## Properties
+**Source:** `waylay.services.data.models.grouping`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (Any Of)
+
+This type allows any of the following:
+
+Type | Description
+------------ | -------------
+[**GroupingAuto**](GroupingAuto.md) | -
+**str** | Time interval with duration unit.
+**str** | A [ISO8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) with day (`D`), hour (`H`), minute (`M`) and second (`S`) specifiers.
 
 ## Example
 
 ```python
 from waylay.services.data.models.grouping import Grouping
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Grouping from a JSON string
-grouping_instance = Grouping.from_json(json)
-# print the JSON string representation of the object
-print Grouping.to_json()
-
-# convert the object into a dict
-grouping_dict = grouping_instance.to_dict()
-# create an instance of Grouping from a dict
-grouping_form_dict = grouping.from_dict(grouping_dict)
+# Use any of the accepted types (see table above)
+my_grouping: Grouping = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

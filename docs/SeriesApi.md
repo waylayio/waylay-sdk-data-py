@@ -17,7 +17,7 @@ Method | HTTP request | Description
 > resource_id: str,
 > query: DeleteSeriesQuery,
 > headers
-> ) -> DeleteMessages200Response
+> ) -> MessageSuccessResult
 
 Delete Series
 
@@ -26,8 +26,6 @@ Removes all timeseries associated with a resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -36,18 +34,17 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
+from waylay.services.data.models.message_success_result import MessageSuccessResult
+
 try:
     # Delete Series
     # calls `DELETE /data/v1/series/{resourceId}`
     api_response = await waylay_client.data.series.delete_series(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.delete_series:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.delete_series: %s\n" % e)
 ```
@@ -62,16 +59,16 @@ Name     | Type  | API binding   | Description   | Notes
 -------- | ----- | ------------- | ------------- | -------------
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
-**query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
-**query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
-**query['Metrics']** (dict) <br> **query.metrics** (Query) | [**List[str]**](str.md) | query parameter `"Metrics"` | If set, only these selected metrics are removed. | [optional] 
+**query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](DeleteSeriesFromParameter.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](DeleteSeriesFromParameter.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
+**query['metrics']** (dict) <br> **query.metrics** (Query) | **List[str]** | query parameter `"metrics"` | If set, only these selected metrics are removed. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
 
 Selected path param | Raw response param | Return Type  | Description | Links
 ------------------- | ------------------ | ------------ | ----------- | -----
-Literal[""] _(default)_  | False _(default)_ | **`DeleteMessages200Response`** |  | [DeleteMessages200Response](DeleteMessages200Response.md)
+Literal[""] _(default)_  | False _(default)_ | **`MessageSuccessResult`** |  | [MessageSuccessResult](MessageSuccessResult.md)
 str | False _(default)_ | **`Any`** | If any other string value for the selected path is provided, the exact type of the response will only be known at runtime. | 
 / | True | `Response` | The raw http response object.
 
@@ -104,8 +101,6 @@ Retrieves the raw, unaggregated values for a series.  When a request with conten
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -116,18 +111,17 @@ waylay_client = WaylayClient.from_profile()
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.order import Order
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
+
 try:
     # Get Unaggregated Values For A Series
     # calls `GET /data/v1/series/{resourceId}/{metric}/raw`
     api_response = await waylay_client.data.series.get_datapoints_for_metric_raw(
-        'resource_id_example', # resource_id | path param "resourceId"
-        'metric_example', # metric | path param "metric"
+        "resource_id_example",  # resource_id | path param "resourceId"
+        "metric_example",  # metric | path param "metric"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.get_datapoints_for_metric_raw:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.get_datapoints_for_metric_raw: %s\n" % e)
 ```
@@ -143,10 +137,10 @@ Name     | Type  | API binding   | Description   | Notes
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
 **metric** | **str** | path parameter `"metric"` | Identifies the times series metric. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
-**query['from']** (dict) <br> **query.var_from** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period. If not specified, a period of 7 days before &#x60;until&#x60; (or before the request was received) will be queried. | [optional] 
-**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
+**query['from']** (dict) <br> **query.var_from** (Query) | [**GetMetricSeriesFromParameter**](GetMetricSeriesFromParameter.md) | query parameter `"from"` | Specifies the lower bound of the time period. If not specified, a period of 7 days before &#x60;until&#x60; (or before the request was received) will be queried. | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](GetMetricSeriesFromParameter.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
 **query['limit']** (dict) <br> **query.limit** (Query) | **int** | query parameter `"limit"` | max number of values to retrieve | [optional] [default 1]
-**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
+**query['order']** (dict) <br> **query.order** (Query) | [**Order**](Order.md) | query parameter `"order"` | sort order | [optional] [default ascending]
 **query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
@@ -187,8 +181,6 @@ Query the time series storage for the latest n datapoints for a particular metri
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -198,18 +190,17 @@ waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
+
 try:
     # Get Last Unaggregated Values For A Series
     # calls `GET /data/v1/series/{resourceId}/{metric}/last`
     api_response = await waylay_client.data.series.get_last_datapoints_for_metric(
-        'resource_id_example', # resource_id | path param "resourceId"
-        'metric_example', # metric | path param "metric"
+        "resource_id_example",  # resource_id | path param "resourceId"
+        "metric_example",  # metric | path param "metric"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.get_last_datapoints_for_metric:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.get_last_datapoints_for_metric: %s\n" % e)
 ```
@@ -226,7 +217,7 @@ Name     | Type  | API binding   | Description   | Notes
 **metric** | **str** | path parameter `"metric"` | Identifies the times series metric. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
 **query['limit']** (dict) <br> **query.limit** (Query) | **int** | query parameter `"limit"` | max number of values to retrieve | [optional] [default 1]
-**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the timestamp before which last values have to be retrieved. If not specified, defaults to the current timestamp. | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](GetMetricSeriesFromParameter.md) | query parameter `"until"` | Specifies the timestamp before which last values have to be retrieved. If not specified, defaults to the current timestamp. | [optional] 
 **query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
@@ -267,8 +258,6 @@ Retrieves the latest value of a time series.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -278,18 +267,17 @@ waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.latest_measurement import LatestMeasurement
+
 try:
     # Get Latest Value For A Series
     # calls `GET /data/v1/series/{resourceId}/{metric}/latest`
     api_response = await waylay_client.data.series.get_last_metric(
-        'resource_id_example', # resource_id | path param "resourceId"
-        'metric_example', # metric | path param "metric"
+        "resource_id_example",  # resource_id | path param "resourceId"
+        "metric_example",  # metric | path param "metric"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.get_last_metric:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.get_last_metric: %s\n" % e)
 ```
@@ -345,8 +333,6 @@ Queries a single timeseries. Depending on the `grouping` query parameter, data w
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -358,18 +344,17 @@ waylay_client = WaylayClient.from_profile()
 from waylay.services.data.models.aggregate import Aggregate
 from waylay.services.data.models.order import Order
 from waylay.services.data.models.timeseries_json_result import TimeseriesJsonResult
+
 try:
     # Query Series
     # calls `GET /data/v1/series/{resourceId}/{metric}`
     api_response = await waylay_client.data.series.get_metric_series(
-        'resource_id_example', # resource_id | path param "resourceId"
-        'metric_example', # metric | path param "metric"
+        "resource_id_example",  # resource_id | path param "resourceId"
+        "metric_example",  # metric | path param "metric"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.get_metric_series:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.get_metric_series: %s\n" % e)
 ```
@@ -385,12 +370,12 @@ Name     | Type  | API binding   | Description   | Notes
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
 **metric** | **str** | path parameter `"metric"` | Identifies the times series metric. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
-**query['from']** (dict) <br> **query.var_from** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period. If not specified, a period of 7 days before &#x60;until&#x60; (or before the request was received) will be queried. | [optional] 
-**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
-**query['aggregate']** (dict) <br> **query.aggregate** (Query) | [**Aggregate**](.md) | query parameter `"aggregate"` | Specifies the aggregation function to use | [optional] 
+**query['from']** (dict) <br> **query.var_from** (Query) | [**GetMetricSeriesFromParameter**](GetMetricSeriesFromParameter.md) | query parameter `"from"` | Specifies the lower bound of the time period. If not specified, a period of 7 days before &#x60;until&#x60; (or before the request was received) will be queried. | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**GetMetricSeriesFromParameter**](GetMetricSeriesFromParameter.md) | query parameter `"until"` | Specifies the upper bound of the time period. If not specified, a period of 7 days after &#x60;from&#x60; (or before the request was received) will be queried | [optional] 
+**query['aggregate']** (dict) <br> **query.aggregate** (Query) | [**Aggregate**](Aggregate.md) | query parameter `"aggregate"` | Specifies the aggregation function to use | [optional] 
 **query['aggregates']** (dict) <br> **query.aggregates** (Query) | **str** | query parameter `"aggregates"` | comma-separated list of aggregation functions | [optional] 
-**query['grouping']** (dict) <br> **query.grouping** (Query) | [**Grouping**](.md) | query parameter `"grouping"` | time period over which timeseries data must be aggregates | [optional] 
-**query['order']** (dict) <br> **query.order** (Query) | [**Order**](.md) | query parameter `"order"` | sort order | [optional] [default ascending]
+**query['grouping']** (dict) <br> **query.grouping** (Query) | [**Grouping**](Grouping.md) | query parameter `"grouping"` | time period over which timeseries data must be aggregates | [optional] 
+**query['order']** (dict) <br> **query.order** (Query) | [**Order**](Order.md) | query parameter `"order"` | sort order | [optional] [default ascending]
 **query['returnIngestionTimestamp']** (dict) <br> **query.return_ingestion_timestamp** (Query) | **bool** | query parameter `"returnIngestionTimestamp"` | return metric ingestion timestamp from time series database. | [optional] [default False]
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
@@ -421,7 +406,7 @@ str | False _(default)_ | **`Any`** | If any other string value for the selected
 > resource_id: str,
 > query: GetSeriesQuery,
 > headers
-> ) -> List[GetSeries200ResponseInner]
+> ) -> List[MetricSummary]
 
 Get Series Overview
 
@@ -430,8 +415,6 @@ Lists the existing timeseries for the given resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -440,18 +423,17 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.get_series200_response_inner import GetSeries200ResponseInner
+from waylay.services.data.models.metric_summary import MetricSummary
+
 try:
     # Get Series Overview
     # calls `GET /data/v1/series/{resourceId}`
     api_response = await waylay_client.data.series.get_series(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.series.get_series:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.get_series: %s\n" % e)
 ```
@@ -473,7 +455,7 @@ Name     | Type  | API binding   | Description   | Notes
 
 Selected path param | Raw response param | Return Type  | Description | Links
 ------------------- | ------------------ | ------------ | ----------- | -----
-Literal[""] _(default)_  | False _(default)_ | **`List[GetSeries200ResponseInner]`** |  | [List[GetSeries200ResponseInner]](GetSeries200ResponseInner.md)
+Literal[""] _(default)_  | False _(default)_ | **`List[MetricSummary]`** |  | [List[MetricSummary]](MetricSummary.md)
 str | False _(default)_ | **`Any`** | If any other string value for the selected path is provided, the exact type of the response will only be known at runtime. | 
 / | True | `Response` | The raw http response object.
 
@@ -493,7 +475,7 @@ str | False _(default)_ | **`Any`** | If any other string value for the selected
 # **query_time_series**
 > query_time_series(
 > headers
-> ) -> QueryTimeSeries200Response
+> ) -> TimeseriesQueryResponse
 
 Query Series Data
 
@@ -502,8 +484,6 @@ Executes an ad-hoc timeseries query.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -512,17 +492,19 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.query_time_series200_response import QueryTimeSeries200Response
 from waylay.services.data.models.query_time_series_request import QueryTimeSeriesRequest
+from waylay.services.data.models.timeseries_query_response import (
+    TimeseriesQueryResponse,
+)
+
 try:
     # Query Series Data
     # calls `POST /data/v1/series/query`
     api_response = await waylay_client.data.series.query_time_series(
         # json data: use a generated model or a json-serializable python data structure (dict, list)
-        json = waylay.services.data.QueryTimeSeriesRequest() # QueryTimeSeriesRequest | 
+        json=waylay.services.data.QueryTimeSeriesRequest(),  # QueryTimeSeriesRequest |
     )
-    print("The response of data.series.query_time_series:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.series.query_time_series: %s\n" % e)
 ```
@@ -542,7 +524,7 @@ Name     | Type  | API binding   | Description   | Notes
 
 Selected path param | Raw response param | Return Type  | Description | Links
 ------------------- | ------------------ | ------------ | ----------- | -----
-Literal[""] _(default)_  | False _(default)_ | **`QueryTimeSeries200Response`** |  | [QueryTimeSeries200Response](QueryTimeSeries200Response.md)
+Literal[""] _(default)_  | False _(default)_ | **`TimeseriesQueryResponse`** |  | [TimeseriesQueryResponse](TimeseriesQueryResponse.md)
 str | False _(default)_ | **`Any`** | If any other string value for the selected path is provided, the exact type of the response will only be known at runtime. | 
 / | True | `Response` | The raw http response object.
 

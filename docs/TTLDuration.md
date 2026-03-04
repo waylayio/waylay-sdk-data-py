@@ -2,28 +2,30 @@
 
 Specifies the duration of a TTL interval.
 
-## Properties
+**Source:** `waylay.services.data.models.ttl_duration`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (One Of)
+
+This type allows one of the following:
+
+Type | Description
+------------ | -------------
+**int** | Number of seconds of a time interval.
+**str** | Time interval with duration unit.
+**str** | A [ISO8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) with day (`D`), hour (`H`), minute (`M`) and second (`S`) specifiers.
 
 ## Example
 
 ```python
 from waylay.services.data.models.ttl_duration import TTLDuration
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TTLDuration from a JSON string
-ttl_duration_instance = TTLDuration.from_json(json)
-# print the JSON string representation of the object
-print TTLDuration.to_json()
-
-# convert the object into a dict
-ttl_duration_dict = ttl_duration_instance.to_dict()
-# create an instance of TTLDuration from a dict
-ttl_duration_form_dict = ttl_duration.from_dict(ttl_duration_dict)
+# Use any of the accepted types (see table above)
+my_ttl_duration: TTLDuration = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

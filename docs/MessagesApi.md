@@ -13,7 +13,7 @@ Method | HTTP request | Description
 > delete_messages(
 > resource_id: str,
 > headers
-> ) -> DeleteMessages200Response
+> ) -> MessageSuccessResult
 
 Remove Messages For Resource
 
@@ -22,8 +22,6 @@ Removes all messages associated with a resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -32,15 +30,15 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
+from waylay.services.data.models.message_success_result import MessageSuccessResult
+
 try:
     # Remove Messages For Resource
     # calls `DELETE /data/v1/messages/{resourceId}`
     api_response = await waylay_client.data.messages.delete_messages(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
     )
-    print("The response of data.messages.delete_messages:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.messages.delete_messages: %s\n" % e)
 ```
@@ -60,7 +58,7 @@ Name     | Type  | API binding   | Description   | Notes
 
 Selected path param | Raw response param | Return Type  | Description | Links
 ------------------- | ------------------ | ------------ | ----------- | -----
-Literal[""] _(default)_  | False _(default)_ | **`DeleteMessages200Response`** |  | [DeleteMessages200Response](DeleteMessages200Response.md)
+Literal[""] _(default)_  | False _(default)_ | **`MessageSuccessResult`** |  | [MessageSuccessResult](MessageSuccessResult.md)
 str | False _(default)_ | **`Any`** | If any other string value for the selected path is provided, the exact type of the response will only be known at runtime. | 
 / | True | `Response` | The raw http response object.
 
@@ -90,8 +88,6 @@ Retrieves the latest (i.e. most recent) message for a resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -101,14 +97,14 @@ waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_event import TimestampedEvent
+
 try:
     # Retrieve Latest Message
     # calls `GET /data/v1/messages/{resourceId}/current`
     api_response = await waylay_client.data.messages.get_latest_document(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
     )
-    print("The response of data.messages.get_latest_document:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.messages.get_latest_document: %s\n" % e)
 ```
@@ -159,8 +155,6 @@ Retrieves the last n messages for a resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -170,14 +164,14 @@ waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.timestamped_event import TimestampedEvent
+
 try:
     # Retrieve Messages For Resource
     # calls `GET /data/v1/messages/{resourceId}`
     api_response = await waylay_client.data.messages.get_latest_messages(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
     )
-    print("The response of data.messages.get_latest_messages:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.messages.get_latest_messages: %s\n" % e)
 ```
@@ -226,8 +220,6 @@ Executes an ad-hoc messages query.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -238,15 +230,15 @@ waylay_client = WaylayClient.from_profile()
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.message_query import MessageQuery
 from waylay.services.data.models.message_query_result import MessageQueryResult
+
 try:
     # Query Messages
     # calls `POST /data/v1/messages/query`
     api_response = await waylay_client.data.messages.query_messages(
         # json data: use a generated model or a json-serializable python data structure (dict, list)
-        json = waylay.services.data.MessageQuery() # MessageQuery |  (optional)
+        json=waylay.services.data.MessageQuery(),  # MessageQuery |  (optional)
     )
-    print("The response of data.messages.query_messages:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.messages.query_messages: %s\n" % e)
 ```

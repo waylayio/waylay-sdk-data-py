@@ -280,21 +280,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    name:
-                      $ref: '#/components/schemas/MetricId'
-                    latest:
-                      type: object
-                      properties:
-                        timestamp:
-                          $ref: '#/components/schemas/UnixEpochMillis'
-                        value:
-                          $ref: '#/components/schemas/ScalarData'
-                      required:
-                        - timestamp
-                  required:
-                    - name
+                  $ref: '#/components/schemas/MetricSummary'
       security:
         - waylayApiKeySecret: []
       x-py-method: get_series
@@ -495,23 +481,7 @@ paths:
                 $ref: '#/components/schemas/TimeseriesJsonResult'
             application/hal+json:
               schema:
-                type: object
-                properties:
-                  _links:
-                    type: object
-                    properties:
-                      next:
-                        $ref: '#/components/schemas/HalLink'
-                  query:
-                    $ref: '#/components/schemas/SeriesQueryResponse'
-                  series:
-                    type: array
-                    description: Array of timestamp-value tuples
-                    items:
-                      $ref: '#/components/schemas/SeriesKeyValue'
-                required:
-                  - query
-                  - series
+                $ref: '#/components/schemas/RawDatapointsResponse'
         '400':
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -543,9 +513,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/TimeseriesJsonResult'
-                  - $ref: '#/components/schemas/MultipleTimeseriesJsonResult'
+                $ref: '#/components/schemas/TimeseriesQueryResponse'
         '400':
           $ref: '#/components/responses/ErrorResponse'
       security:
@@ -610,10 +578,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TimestampedResourceEvent'
             - $ref: '#/components/schemas/TimestampedResourceEvents'
-            - type: object
-              description: Marks that multiple events where published
-              enum:
-                - {}
+            - $ref: '#/components/schemas/PublishEventResponse[object Object]'
     PublishResourceEventResponse:
       type: object
       properties:
@@ -622,10 +587,7 @@ components:
         content:
           anyOf:
             - $ref: '#/components/schemas/TimestampedEvent'
-            - type: object
-              description: Marks that multiple events where published
-              enum:
-                - {}
+            - $ref: '#/components/schemas/PublishResourceEventResponse[object Object]'
     ErrorResponse:
       type: object
       properties:
@@ -654,7 +616,7 @@ components:
             of the broker will added as `timestamp` attribute.
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
       additionalProperties:
         $ref: '#/components/schemas/Measurements'
     Events:
@@ -677,6 +639,9 @@ components:
     ResourceEvent:
       type: object
       description: Measurement object with resource identifier and optional timestamp.
+      example:
+        resource: resource-1
+        temperature: 23.5
       properties:
         resource:
           $ref: '#/components/schemas/ResourceId'
@@ -686,7 +651,7 @@ components:
             of the broker will added as `timestamp` attribute.
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
       additionalProperties:
         $ref: '#/components/schemas/Measurements'
       required:
@@ -725,15 +690,19 @@ components:
         Arrays and objects are only stored in the _Message Cache_.
       oneOf:
         - $ref: '#/components/schemas/ScalarData'
-        - title: Object Data
-          description: Event data stored only in the _Message Cache_.
-          oneOf:
-            - title: Object
-              type: object
-            - title: Array
-              type: array
-              items:
-                $ref: '#/components/schemas/Measurements'
+        - $ref: '#/components/schemas/ObjectData'
+    ObjectData:
+      description: Event data stored only in the _Message Cache_.
+      example:
+        timestamp: 1729869037000
+        temperature: 23
+      oneOf:
+        - title: Object
+          type: object
+        - title: Array
+          type: array
+          items:
+            $ref: '#/components/schemas/Measurements'
     ScalarData:
       description: >-
         Event data stored in both the _Message Cache_ and _Time Series
@@ -753,7 +722,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DurationSeconds'
         - $ref: '#/components/schemas/DurationWithUnit'
-        - $ref: '#/components/schemas/SO8601Duration'
+        - $ref: '#/components/schemas/ISO8601Duration'
     DurationSeconds:
       type: integer
       minimum: 0
@@ -772,14 +741,14 @@ components:
 
         not counting leap seconds.
       example: 1663269720694
-    SO8601Duration:
+    ISO8601Duration:
       type: string
       description: |-
         A [ISO8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations)
         with day (`D`), hour (`H`), minute (`M`) and second (`S`) specifiers.
       pattern: ^P(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?
       example: PT3H2M6.213S
-    SO8601Timestamp:
+    ISO8601Timestamp:
       type: string
       format: date-time
       example: '2011-09-06T12:03:27.845Z'
@@ -800,19 +769,19 @@ components:
           description: The lower bound of the time range to retrieve message from
           anyOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         until:
           description: The upper bound of the time range to retrieve message from
           anyOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         window:
           description: >-
             A duration expression. Will be evaluated vs `from`, `until` or the
             query execution date to get the actual time range
           anyOf:
             - $ref: '#/components/schemas/DurationWithUnit'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
       required:
         - resources
         - limit
@@ -824,14 +793,7 @@ components:
         results:
           type: array
           items:
-            type: object
-            properties:
-              resource:
-                $ref: '#/components/schemas/ResourceId'
-              messages:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TimestampedEvent'
+            $ref: '#/components/schemas/MessageQueryResultItem'
     Aggregate:
       externalDocs:
         description: Possible functions
@@ -856,11 +818,9 @@ components:
         description: Possible groupings
         url: https://docs.waylay.io/#/api/broker/?id=grouping
       anyOf:
-        - type: string
-          enum:
-            - auto
+        - $ref: '#/components/schemas/GroupingAuto'
         - $ref: '#/components/schemas/DurationWithUnit'
-        - $ref: '#/components/schemas/SO8601Duration'
+        - $ref: '#/components/schemas/ISO8601Duration'
     SeriesQueryResponse:
       type: object
       properties:
@@ -966,15 +926,15 @@ components:
         from:
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         until:
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         window:
           oneOf:
             - $ref: '#/components/schemas/DurationWithUnit'
-            - $ref: '#/components/schemas/SO8601Duration'
+            - $ref: '#/components/schemas/ISO8601Duration'
         metric:
           $ref: '#/components/schemas/MetricId'
         aggregates:
@@ -1008,15 +968,15 @@ components:
         from:
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         until:
           oneOf:
             - $ref: '#/components/schemas/UnixEpochMillis'
-            - $ref: '#/components/schemas/SO8601Timestamp'
+            - $ref: '#/components/schemas/ISO8601Timestamp'
         window:
           oneOf:
             - $ref: '#/components/schemas/DurationWithUnit'
-            - $ref: '#/components/schemas/SO8601Duration'
+            - $ref: '#/components/schemas/ISO8601Duration'
         metric:
           $ref: '#/components/schemas/MetricId'
         aggregates:
@@ -1046,9 +1006,7 @@ components:
       type: array
       minItems: 1
       items:
-        oneOf:
-          - $ref: '#/components/schemas/SeriesQueryRequest'
-          - $ref: '#/components/schemas/SeriesQueryWithoutAggregatesRequest'
+        $ref: '#/components/schemas/SeriesQueryItem'
     SeriesKeyValue:
       type: array
       description: >-
@@ -1057,10 +1015,7 @@ components:
 
         The second item is the value, which is a scalar value or `null`.
       items:
-        nullable: true
-        oneOf:
-          - $ref: '#/components/schemas/UnixEpochMillis'
-          - $ref: '#/components/schemas/ScalarData'
+        $ref: '#/components/schemas/SeriesValue'
       minItems: 2
       maxItems: 2
     TimeseriesJsonResult:
@@ -1094,6 +1049,87 @@ components:
       required:
         - href
         - name
+    LatestValue:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/UnixEpochMillis'
+        value:
+          $ref: '#/components/schemas/ScalarData'
+      required:
+        - timestamp
+    MetricSummary:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/MetricId'
+        latest:
+          $ref: '#/components/schemas/LatestValue'
+      required:
+        - name
+    RawDatapointsLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HalLink'
+    RawDatapointsResponse:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/RawDatapointsLinks'
+        query:
+          $ref: '#/components/schemas/SeriesQueryResponse'
+        series:
+          type: array
+          description: Array of timestamp-value tuples
+          items:
+            $ref: '#/components/schemas/SeriesKeyValue'
+      required:
+        - query
+        - series
+    TimeseriesQueryResponse:
+      oneOf:
+        - $ref: '#/components/schemas/TimeseriesJsonResult'
+        - $ref: '#/components/schemas/MultipleTimeseriesJsonResult'
+    PublishEventResponse[object Object]:
+      type: object
+      description: Marks that multiple events where published
+      enum:
+        - {}
+    PublishResourceEventResponse[object Object]:
+      type: object
+      description: Marks that multiple events where published
+      enum:
+        - {}
+    MessageQueryResultItem:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/ResourceId'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimestampedEvent'
+    GroupingAuto:
+      type: string
+      enum:
+        - auto
+    SeriesQueryItem:
+      oneOf:
+        - $ref: '#/components/schemas/SeriesQueryRequest'
+        - $ref: '#/components/schemas/SeriesQueryWithoutAggregatesRequest'
+    SeriesValue:
+      nullable: true
+      oneOf:
+        - $ref: '#/components/schemas/UnixEpochMillis'
+        - $ref: '#/components/schemas/ScalarData'
+    MessageSuccessResult:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
   responses:
     DefaultSuccessResponse:
       description: Successful Response
@@ -1106,12 +1142,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
-            required:
-              - message
+            $ref: '#/components/schemas/MessageSuccessResult'
     VersionResponse:
       description: Successful Response
       content:
@@ -1240,7 +1271,7 @@ components:
         type: boolean
         default: false
     MetricsToDelete:
-      name: Metrics
+      name: metrics
       in: query
       description: If set, only these selected metrics are removed.
       schema:
@@ -1260,7 +1291,7 @@ components:
       schema:
         anyOf:
           - $ref: '#/components/schemas/UnixEpochMillis'
-          - $ref: '#/components/schemas/SO8601Timestamp'
+          - $ref: '#/components/schemas/ISO8601Timestamp'
     SeriesQueryUntil:
       name: until
       in: query
@@ -1273,7 +1304,7 @@ components:
       schema:
         anyOf:
           - $ref: '#/components/schemas/UnixEpochMillis'
-          - $ref: '#/components/schemas/SO8601Timestamp'
+          - $ref: '#/components/schemas/ISO8601Timestamp'
     SeriesLastUntil:
       name: until
       in: query
@@ -1284,7 +1315,7 @@ components:
       schema:
         anyOf:
           - $ref: '#/components/schemas/UnixEpochMillis'
-          - $ref: '#/components/schemas/SO8601Timestamp'
+          - $ref: '#/components/schemas/ISO8601Timestamp'
     Aggregate:
       name: aggregate
       in: query

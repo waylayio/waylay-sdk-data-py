@@ -1,28 +1,31 @@
 # GetMetricSeriesFromParameter
 
 
-## Properties
+**Source:** `waylay.services.data.models.get_metric_series_from_parameter`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (Any Of)
+
+This type allows any of the following:
+
+Type | Description
+------------ | -------------
+**int** | Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds.
+**datetime** | -
 
 ## Example
 
 ```python
-from waylay.services.data.models.get_metric_series_from_parameter import GetMetricSeriesFromParameter
+from waylay.services.data.models.get_metric_series_from_parameter import (
+    GetMetricSeriesFromParameter,
+)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GetMetricSeriesFromParameter from a JSON string
-get_metric_series_from_parameter_instance = GetMetricSeriesFromParameter.from_json(json)
-# print the JSON string representation of the object
-print GetMetricSeriesFromParameter.to_json()
-
-# convert the object into a dict
-get_metric_series_from_parameter_dict = get_metric_series_from_parameter_instance.to_dict()
-# create an instance of GetMetricSeriesFromParameter from a dict
-get_metric_series_from_parameter_form_dict = get_metric_series_from_parameter.from_dict(get_metric_series_from_parameter_dict)
+# Use any of the accepted types (see table above)
+my_get_metric_series_from_parameter: GetMetricSeriesFromParameter = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

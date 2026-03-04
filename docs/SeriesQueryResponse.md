@@ -1,6 +1,11 @@
 # SeriesQueryResponse
 
 
+**Source:** `waylay.services.data.models.series_query_response`
+
+
+
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -14,23 +19,34 @@ Name | Type | Description | Notes
 **filter** | [**TimeseriesFilter**](TimeseriesFilter.md) |  | [optional] 
 **limit** | **int** |  | [optional] 
 
+
 ## Example
 
 ```python
 from waylay.services.data.models.series_query_response import SeriesQueryResponse
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SeriesQueryResponse from a JSON string
-series_query_response_instance = SeriesQueryResponse.from_json(json)
-# print the JSON string representation of the object
-print SeriesQueryResponse.to_json()
+series_query_response = SeriesQueryResponse(
+    var_from=...,
+    until=...,
+    metric=...,
+    aggregates=...,
+    grouping=...,
+    resources=...,
+    filter=...,
+    limit=...,
+)
 
-# convert the object into a dict
-series_query_response_dict = series_query_response_instance.to_dict()
-# create an instance of SeriesQueryResponse from a dict
-series_query_response_form_dict = series_query_response.from_dict(series_query_response_dict)
+# Create from JSON
+series_query_response = SeriesQueryResponse.from_json(
+    '{ "from": ..., "until": ..., "metric": ..., "aggregates": ..., "grouping": ..., "resources": ..., "filter": ..., "limit": ... }'
+)
+
+# Export to dictionary
+series_query_response_dict = series_query_response.to_dict()
 ```
+
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

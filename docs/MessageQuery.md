@@ -1,6 +1,11 @@
 # MessageQuery
 
 
+**Source:** `waylay.services.data.models.message_query`
+
+
+
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -11,23 +16,27 @@ Name | Type | Description | Notes
 **until** | [**MessageQueryUntil**](MessageQueryUntil.md) |  | [optional] 
 **window** | [**MessageQueryWindow**](MessageQueryWindow.md) |  | [optional] 
 
+
 ## Example
 
 ```python
 from waylay.services.data.models.message_query import MessageQuery
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of MessageQuery from a JSON string
-message_query_instance = MessageQuery.from_json(json)
-# print the JSON string representation of the object
-print MessageQuery.to_json()
+message_query = MessageQuery(
+    resources=..., limit=..., var_from=..., until=..., window=...
+)
 
-# convert the object into a dict
-message_query_dict = message_query_instance.to_dict()
-# create an instance of MessageQuery from a dict
-message_query_form_dict = message_query.from_dict(message_query_dict)
+# Create from JSON
+message_query = MessageQuery.from_json(
+    '{ "resources": ..., "limit": ..., "from": ..., "until": ..., "window": ... }'
+)
+
+# Export to dictionary
+message_query_dict = message_query.to_dict()
 ```
+
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

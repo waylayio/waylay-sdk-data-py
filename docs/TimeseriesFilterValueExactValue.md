@@ -1,28 +1,31 @@
 # TimeseriesFilterValueExactValue
 
 
-## Properties
+**Source:** `waylay.services.data.models.timeseries_filter_value_exact_value`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (One Of)
+
+This type allows one of the following:
+
+Type | Description
+------------ | -------------
+**float** | -
+**str** | -
 
 ## Example
 
 ```python
-from waylay.services.data.models.timeseries_filter_value_exact_value import TimeseriesFilterValueExactValue
+from waylay.services.data.models.timeseries_filter_value_exact_value import (
+    TimeseriesFilterValueExactValue,
+)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TimeseriesFilterValueExactValue from a JSON string
-timeseries_filter_value_exact_value_instance = TimeseriesFilterValueExactValue.from_json(json)
-# print the JSON string representation of the object
-print TimeseriesFilterValueExactValue.to_json()
-
-# convert the object into a dict
-timeseries_filter_value_exact_value_dict = timeseries_filter_value_exact_value_instance.to_dict()
-# create an instance of TimeseriesFilterValueExactValue from a dict
-timeseries_filter_value_exact_value_form_dict = timeseries_filter_value_exact_value.from_dict(timeseries_filter_value_exact_value_dict)
+# Use any of the accepted types (see table above)
+my_timeseries_filter_value_exact_value: TimeseriesFilterValueExactValue = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

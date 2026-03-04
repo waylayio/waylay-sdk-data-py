@@ -1,6 +1,11 @@
 # SeriesQueryRequest
 
 
+**Source:** `waylay.services.data.models.series_query_request`
+
+
+
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -17,23 +22,37 @@ Name | Type | Description | Notes
 **order** | [**Order**](Order.md) |  | [optional] [default to Order.ASCENDING]
 **return_ingestion_timestamp** | **bool** |  | [optional] [default to False]
 
+
 ## Example
 
 ```python
 from waylay.services.data.models.series_query_request import SeriesQueryRequest
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SeriesQueryRequest from a JSON string
-series_query_request_instance = SeriesQueryRequest.from_json(json)
-# print the JSON string representation of the object
-print SeriesQueryRequest.to_json()
+series_query_request = SeriesQueryRequest(
+    var_from=...,
+    until=...,
+    window=...,
+    metric=...,
+    aggregates=...,
+    grouping=...,
+    resources=...,
+    max_results=...,
+    filter=...,
+    order=...,
+    return_ingestion_timestamp=...,
+)
 
-# convert the object into a dict
-series_query_request_dict = series_query_request_instance.to_dict()
-# create an instance of SeriesQueryRequest from a dict
-series_query_request_form_dict = series_query_request.from_dict(series_query_request_dict)
+# Create from JSON
+series_query_request = SeriesQueryRequest.from_json(
+    '{ "from": ..., "until": ..., "window": ..., "metric": ..., "aggregates": ..., "grouping": ..., "resources": ..., "maxResults": ..., "filter": ..., "order": ..., "returnIngestionTimestamp": ... }'
+)
+
+# Export to dictionary
+series_query_request_dict = series_query_request.to_dict()
 ```
+
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
