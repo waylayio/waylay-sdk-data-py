@@ -2,28 +2,29 @@
 
 Event data stored only in the _Message Cache_.
 
-## Properties
+**Source:** `waylay.services.data.models.object_data`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (One Of)
+
+This type allows one of the following:
+
+Type | Description
+------------ | -------------
+**object** | -
+[**List[Measurements]**](Measurements.md) | -
 
 ## Example
 
 ```python
 from waylay.services.data.models.object_data import ObjectData
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ObjectData from a JSON string
-object_data_instance = ObjectData.from_json(json)
-# print the JSON string representation of the object
-print ObjectData.to_json()
-
-# convert the object into a dict
-object_data_dict = object_data_instance.to_dict()
-# create an instance of ObjectData from a dict
-object_data_form_dict = object_data.from_dict(object_data_dict)
+# Use any of the accepted types (see table above)
+my_object_data: ObjectData = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

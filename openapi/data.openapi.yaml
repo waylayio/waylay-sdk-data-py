@@ -209,11 +209,13 @@ paths:
                 type: array
                 items:
                   type: object
+                  x-classname: MetricSummary
                   properties:
                     name:
                       $ref: '#/components/schemas/MetricId'
                     latest:
                       type: object
+                      x-classname: LatestValue
                       properties:
                         timestamp:
                           $ref: '#/components/schemas/UnixEpochMillis'
@@ -357,9 +359,11 @@ paths:
             application/hal+json:
               schema:
                 type: object
+                x-classname: RawDatapointsResponse
                 properties:
                   _links:
                     type: object
+                    x-classname: RawDatapointsLinks
                     properties:
                       next:
                         $ref: '#/components/schemas/HalLink'
@@ -398,6 +402,7 @@ paths:
           content:
             application/json:
               schema:
+                x-classname: TimeseriesQueryResponse
                 oneOf:
                 - $ref: '#/components/schemas/TimeseriesJsonResult'
                 - $ref: '#/components/schemas/MultipleTimeseriesJsonResult'
@@ -518,6 +523,9 @@ components:
     ResourceEvent:
       type: object
       description: Measurement object with resource identifier and optional timestamp.
+      example:
+        resource: resource-1
+        temperature: 23.5
       properties:
         resource:
           $ref: '#/components/schemas/ResourceId'
@@ -567,15 +575,20 @@ components:
         Arrays and objects are only stored in the _Message Cache_.'
       oneOf:
       - $ref: '#/components/schemas/ScalarData'
-      - title: Object Data
-        description: Event data stored only in the _Message Cache_.
-        oneOf:
-        - title: Object
-          type: object
-        - title: Array
-          type: array
-          items:
-            $ref: '#/components/schemas/Measurements'
+      - $ref: '#/components/schemas/ObjectData'
+    ObjectData:
+      title: Object Data
+      description: Event data stored only in the _Message Cache_.
+      example:
+        timestamp: 1729869037000
+        temperature: 23
+      oneOf:
+      - title: Object
+        type: object
+      - title: Array
+        type: array
+        items:
+          $ref: '#/components/schemas/Measurements'
     ScalarData:
       title: Scalar Data
       description: 'Event data stored in both the _Message Cache_ and _Time Series
@@ -671,6 +684,7 @@ components:
           type: array
           items:
             type: object
+            x-classname: MessageQueryResultItem
             properties:
               resource:
                 $ref: '#/components/schemas/ResourceId'
@@ -901,6 +915,7 @@ components:
       type: array
       minItems: 1
       items:
+        x-classname: SeriesQueryItem
         oneOf:
         - $ref: '#/components/schemas/SeriesQueryRequest'
         - $ref: '#/components/schemas/SeriesQueryWithoutAggregatesRequest'
@@ -912,6 +927,7 @@ components:
 
         The second item is the value, which is a scalar value or `null`.'
       items:
+        x-classname: SeriesValue
         nullable: true
         oneOf:
         - $ref: '#/components/schemas/UnixEpochMillis'
@@ -964,6 +980,7 @@ components:
         application/json:
           schema:
             type: object
+            x-classname: MessageSuccessResult
             properties:
               message:
                 type: string
@@ -1088,7 +1105,7 @@ components:
         type: boolean
         default: false
     MetricsToDelete:
-      name: Metrics
+      name: metrics
       in: query
       description: If set, only these selected metrics are removed.
       schema:

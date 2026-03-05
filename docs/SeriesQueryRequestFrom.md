@@ -1,28 +1,29 @@
 # SeriesQueryRequestFrom
 
 
-## Properties
+**Source:** `waylay.services.data.models.series_query_request_from`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (One Of)
+
+This type allows one of the following:
+
+Type | Description
+------------ | -------------
+**int** | Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds.
+**datetime** | -
 
 ## Example
 
 ```python
 from waylay.services.data.models.series_query_request_from import SeriesQueryRequestFrom
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SeriesQueryRequestFrom from a JSON string
-series_query_request_from_instance = SeriesQueryRequestFrom.from_json(json)
-# print the JSON string representation of the object
-print SeriesQueryRequestFrom.to_json()
-
-# convert the object into a dict
-series_query_request_from_dict = series_query_request_from_instance.to_dict()
-# create an instance of SeriesQueryRequestFrom from a dict
-series_query_request_from_form_dict = series_query_request_from.from_dict(series_query_request_from_dict)
+# Use any of the accepted types (see table above)
+my_series_query_request_from: SeriesQueryRequestFrom = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

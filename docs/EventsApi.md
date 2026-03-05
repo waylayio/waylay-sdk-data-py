@@ -22,8 +22,6 @@ Pushes events to broker.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -34,18 +32,17 @@ waylay_client = WaylayClient.from_profile()
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
 from waylay.services.data.models.post_series_request import PostSeriesRequest
 from waylay.services.data.models.publish_event_response import PublishEventResponse
+
 try:
     # Post Events
     # calls `POST /data/v1/events`
     api_response = await waylay_client.data.events.post_series(
         # query parameters:
-        query = {
-        },
+        query={},
         # json data: use a generated model or a json-serializable python data structure (dict, list)
-        json = waylay.services.data.PostSeriesRequest() # PostSeriesRequest |  (optional)
+        json=waylay.services.data.PostSeriesRequest(),  # PostSeriesRequest |  (optional)
     )
-    print("The response of data.events.post_series:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.events.post_series: %s\n" % e)
 ```
@@ -62,7 +59,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
 **query['forward']** (dict) <br> **query.forward** (Query) | **bool** | query parameter `"forward"` | If payload is a single event, _Events_ are forwarded to the [Rule Engine](/#/api/rules/) unless &#x60;forward&#x60; is explicitly set to &#x60;false&#x60;. If payload has multiple events and each event is for a distinct resource, all _Events_ are forwarded to the [Rule Engine](/#/api/rules/) unless &#x60;forward&#x60; is explicitly set to &#x60;false&#x60; If payload has multiple events and there are multiple events for the same resource, an error will be returned if &#x60;forward&#x60; is explicitly set to &#x60;true&#x60;. | [optional] [default True]
 **query['store']** (dict) <br> **query.store** (Query) | **bool** | query parameter `"store"` | Unless explicitly set to &#x60;false&#x60;, _Events_ are stored  into message cache, and their scalar attributes stored in the time series database. | [optional] [default True]
-**query['ttl']** (dict) <br> **query.ttl** (Query) | [**TTLDuration**](.md) | query parameter `"ttl"` | Specifies how long data persists in both the message cache and time series database. | [optional] 
+**query['ttl']** (dict) <br> **query.ttl** (Query) | [**TTLDuration**](TTLDuration.md) | query parameter `"ttl"` | Specifies how long data persists in both the message cache and time series database. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -101,8 +98,6 @@ Pushes events for a given resource to broker.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -111,21 +106,24 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.post_series_for_resource_request import PostSeriesForResourceRequest
-from waylay.services.data.models.publish_resource_event_response import PublishResourceEventResponse
+from waylay.services.data.models.post_series_for_resource_request import (
+    PostSeriesForResourceRequest,
+)
+from waylay.services.data.models.publish_resource_event_response import (
+    PublishResourceEventResponse,
+)
+
 try:
     # Post Events For Resource
     # calls `POST /data/v1/events/{resourceId}`
     api_response = await waylay_client.data.events.post_series_for_resource(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
         # query parameters:
-        query = {
-        },
+        query={},
         # json data: use a generated model or a json-serializable python data structure (dict, list)
-        json = waylay.services.data.PostSeriesForResourceRequest() # PostSeriesForResourceRequest |  (optional)
+        json=waylay.services.data.PostSeriesForResourceRequest(),  # PostSeriesForResourceRequest |  (optional)
     )
-    print("The response of data.events.post_series_for_resource:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.events.post_series_for_resource: %s\n" % e)
 ```
@@ -143,7 +141,7 @@ Name     | Type  | API binding   | Description   | Notes
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
 **query['forward']** (dict) <br> **query.forward** (Query) | **bool** | query parameter `"forward"` | If payload is a single event, _Events_ are forwarded to the [Rule Engine](/#/api/rules/) unless &#x60;forward&#x60; is explicitly set to &#x60;false&#x60;. If payload has multiple events, this parameter is ignored and _Events_ will only be stored into message cache and their scalar attributes in the timeseries database. | [optional] [default True]
 **query['store']** (dict) <br> **query.store** (Query) | **bool** | query parameter `"store"` | Unless explicitly set to &#x60;false&#x60;, _Events_ are stored  into message cache, and their scalar attributes stored in the time series database. | [optional] [default True]
-**query['ttl']** (dict) <br> **query.ttl** (Query) | [**TTLDuration**](.md) | query parameter `"ttl"` | Specifies how long data persists in both the message cache and time series database. | [optional] 
+**query['ttl']** (dict) <br> **query.ttl** (Query) | [**TTLDuration**](TTLDuration.md) | query parameter `"ttl"` | Specifies how long data persists in both the message cache and time series database. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
@@ -173,7 +171,7 @@ str | False _(default)_ | **`Any`** | If any other string value for the selected
 > resource_id: str,
 > query: RemoveQuery,
 > headers
-> ) -> DeleteMessages200Response
+> ) -> MessageSuccessResult
 
 Remove Data
 
@@ -182,8 +180,6 @@ Removes all data for a resource.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -192,18 +188,17 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.delete_messages200_response import DeleteMessages200Response
+from waylay.services.data.models.message_success_result import MessageSuccessResult
+
 try:
     # Remove Data
     # calls `DELETE /data/v1/{resourceId}`
     api_response = await waylay_client.data.events.remove(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
         # query parameters:
-        query = {
-        },
+        query={},
     )
-    print("The response of data.events.remove:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.events.remove: %s\n" % e)
 ```
@@ -218,17 +213,17 @@ Name     | Type  | API binding   | Description   | Notes
 -------- | ----- | ------------- | ------------- | -------------
 **resource_id** | **str** | path parameter `"resourceId"` | Uniquely identifies a resource. | 
 **query** | [QueryParamTypes](Operation.md#req_arg_query) \| **None** | URL query parameter |  | 
-**query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
-**query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
+**query['from']** (dict) <br> **query.var_from** (Query) | [**DeleteSeriesFromParameter**](DeleteSeriesFromParameter.md) | query parameter `"from"` | Specifies the lower bound of the time period | [optional] 
+**query['until']** (dict) <br> **query.until** (Query) | [**DeleteSeriesFromParameter**](DeleteSeriesFromParameter.md) | query parameter `"until"` | Specifies the upper bound of the time period | [optional] 
 **query['onlytimeseries']** (dict) <br> **query.onlytimeseries** (Query) | **bool** | query parameter `"onlytimeseries"` | if set to &#x60;true&#x60; will only delete timeseries data | [optional] [default False]
-**query['Metrics']** (dict) <br> **query.metrics** (Query) | [**List[str]**](str.md) | query parameter `"Metrics"` | If set, only these selected metrics are removed. | [optional] 
+**query['metrics']** (dict) <br> **query.metrics** (Query) | **List[str]** | query parameter `"metrics"` | If set, only these selected metrics are removed. | [optional] 
 **headers** | [HeaderTypes](Operation.md#req_headers) | request headers |  | 
 
 ### Return type
 
 Selected path param | Raw response param | Return Type  | Description | Links
 ------------------- | ------------------ | ------------ | ----------- | -----
-Literal[""] _(default)_  | False _(default)_ | **`DeleteMessages200Response`** |  | [DeleteMessages200Response](DeleteMessages200Response.md)
+Literal[""] _(default)_  | False _(default)_ | **`MessageSuccessResult`** |  | [MessageSuccessResult](MessageSuccessResult.md)
 str | False _(default)_ | **`Any`** | If any other string value for the selected path is provided, the exact type of the response will only be known at runtime. | 
 / | True | `Response` | The raw http response object.
 
@@ -259,8 +254,6 @@ Opens a data stream for the _Events_ of the given _Resource_.
 ### Example
 
 ```python
-from pprint import pprint
-
 # Import the waylay-client from the waylay-sdk-core package
 from waylay.sdk.client import WaylayClient
 from waylay.sdk.api.api_exceptions import ApiError
@@ -269,15 +262,17 @@ from waylay.sdk.api.api_exceptions import ApiError
 waylay_client = WaylayClient.from_profile()
 
 # Note that the typed model classes for responses/parameters/... are only available when `waylay-sdk-data-types` is installed
-from waylay.services.data.models.timestamped_resource_event import TimestampedResourceEvent
+from waylay.services.data.models.timestamped_resource_event import (
+    TimestampedResourceEvent,
+)
+
 try:
     # Stream Events For Resource
     # calls `GET /data/v1/events/{resourceId}`
     api_response = await waylay_client.data.events.stream_events(
-        'resource_id_example', # resource_id | path param "resourceId"
+        "resource_id_example",  # resource_id | path param "resourceId"
     )
-    print("The response of data.events.stream_events:\n")
-    pprint(api_response)
+    print(f"Response: {api_response}")
 except ApiError as e:
     print("Exception when calling data.events.stream_events: %s\n" % e)
 ```

@@ -1,28 +1,31 @@
 # SeriesQueryRequestWindow
 
 
-## Properties
+**Source:** `waylay.services.data.models.series_query_request_window`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (One Of)
+
+This type allows one of the following:
+
+Type | Description
+------------ | -------------
+**str** | Time interval with duration unit.
+**str** | A [ISO8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) with day (`D`), hour (`H`), minute (`M`) and second (`S`) specifiers.
 
 ## Example
 
 ```python
-from waylay.services.data.models.series_query_request_window import SeriesQueryRequestWindow
+from waylay.services.data.models.series_query_request_window import (
+    SeriesQueryRequestWindow,
+)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SeriesQueryRequestWindow from a JSON string
-series_query_request_window_instance = SeriesQueryRequestWindow.from_json(json)
-# print the JSON string representation of the object
-print SeriesQueryRequestWindow.to_json()
-
-# convert the object into a dict
-series_query_request_window_dict = series_query_request_window_instance.to_dict()
-# create an instance of SeriesQueryRequestWindow from a dict
-series_query_request_window_form_dict = series_query_request_window.from_dict(series_query_request_window_dict)
+# Use any of the accepted types (see table above)
+my_series_query_request_window: SeriesQueryRequestWindow = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

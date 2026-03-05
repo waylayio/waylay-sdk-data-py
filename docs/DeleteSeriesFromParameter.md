@@ -1,28 +1,31 @@
 # DeleteSeriesFromParameter
 
 
-## Properties
+**Source:** `waylay.services.data.models.delete_series_from_parameter`
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+
+
+## Union Type (Any Of)
+
+This type allows any of the following:
+
+Type | Description
+------------ | -------------
+**int** | Timestamp expressed as milliseconds since 00:00:00 UTC on 1 January 1970,  not counting leap seconds.
+**str** | Time interval with duration unit.
 
 ## Example
 
 ```python
-from waylay.services.data.models.delete_series_from_parameter import DeleteSeriesFromParameter
+from waylay.services.data.models.delete_series_from_parameter import (
+    DeleteSeriesFromParameter,
+)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DeleteSeriesFromParameter from a JSON string
-delete_series_from_parameter_instance = DeleteSeriesFromParameter.from_json(json)
-# print the JSON string representation of the object
-print DeleteSeriesFromParameter.to_json()
-
-# convert the object into a dict
-delete_series_from_parameter_dict = delete_series_from_parameter_instance.to_dict()
-# create an instance of DeleteSeriesFromParameter from a dict
-delete_series_from_parameter_form_dict = delete_series_from_parameter.from_dict(delete_series_from_parameter_dict)
+# Use any of the accepted types (see table above)
+my_delete_series_from_parameter: DeleteSeriesFromParameter = ...
 ```
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

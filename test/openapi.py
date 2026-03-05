@@ -24,7 +24,7 @@ def with_example_provider(dct):
     return dct
 
 
-with open("openapi/data.transformed.openapi.yaml", "r") as file:
+with open("openapi/data.transformed.openapi.yaml") as file:
     OPENAPI_SPEC = yaml.safe_load(file)
 
 MODEL_DEFINITIONS = OPENAPI_SPEC["components"]["schemas"]
@@ -43,23 +43,6 @@ _aggregate_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({"Aggregate": _aggregate_model_schema})
-
-_delete_messages_200_response_model_schema = json.loads(
-    r"""{
-  "required" : [ "message" ],
-  "type" : "object",
-  "properties" : {
-    "message" : {
-      "type" : "string"
-    }
-  }
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({
-    "deleteMessages_200_response": _delete_messages_200_response_model_schema
-})
 
 _delete_series_from_parameter_model_schema = json.loads(
     r"""{
@@ -116,7 +99,7 @@ _event_timestamp_model_schema = json.loads(
   "oneOf" : [ {
     "$ref" : "#/components/schemas/UnixEpochMillis"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -124,55 +107,12 @@ _event_timestamp_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"Event_timestamp": _event_timestamp_model_schema})
 
-_get_datapoints_for_metric_raw_200_response_model_schema = json.loads(
-    r"""{
-  "required" : [ "query", "series" ],
-  "type" : "object",
-  "properties" : {
-    "_links" : {
-      "$ref" : "#/components/schemas/getDatapointsForMetricRaw_200_response__links"
-    },
-    "query" : {
-      "$ref" : "#/components/schemas/SeriesQueryResponse"
-    },
-    "series" : {
-      "type" : "array",
-      "description" : "Array of timestamp-value tuples",
-      "items" : {
-        "$ref" : "#/components/schemas/SeriesKeyValue"
-      }
-    }
-  }
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({
-    "getDatapointsForMetricRaw_200_response": _get_datapoints_for_metric_raw_200_response_model_schema
-})
-
-_get_datapoints_for_metric_raw_200_response__links_model_schema = json.loads(
-    r"""{
-  "type" : "object",
-  "properties" : {
-    "next" : {
-      "$ref" : "#/components/schemas/HalLink"
-    }
-  }
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({
-    "getDatapointsForMetricRaw_200_response__links": _get_datapoints_for_metric_raw_200_response__links_model_schema
-})
-
 _get_metric_series_from_parameter_model_schema = json.loads(
     r"""{
   "anyOf" : [ {
     "$ref" : "#/components/schemas/UnixEpochMillis"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -182,46 +122,6 @@ MODEL_DEFINITIONS.update({
     "getMetricSeries_from_parameter": _get_metric_series_from_parameter_model_schema
 })
 
-_get_series_200_response_inner_model_schema = json.loads(
-    r"""{
-  "required" : [ "name" ],
-  "type" : "object",
-  "properties" : {
-    "name" : {
-      "$ref" : "#/components/schemas/MetricId"
-    },
-    "latest" : {
-      "$ref" : "#/components/schemas/getSeries_200_response_inner_latest"
-    }
-  }
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({
-    "getSeries_200_response_inner": _get_series_200_response_inner_model_schema
-})
-
-_get_series_200_response_inner_latest_model_schema = json.loads(
-    r"""{
-  "required" : [ "timestamp" ],
-  "type" : "object",
-  "properties" : {
-    "timestamp" : {
-      "$ref" : "#/components/schemas/UnixEpochMillis"
-    },
-    "value" : {
-      "$ref" : "#/components/schemas/ScalarData"
-    }
-  }
-}
-""",
-    object_hook=with_example_provider,
-)
-MODEL_DEFINITIONS.update({
-    "getSeries_200_response_inner_latest": _get_series_200_response_inner_latest_model_schema
-})
-
 _grouping_model_schema = json.loads(
     r"""{
   "externalDocs" : {
@@ -229,11 +129,11 @@ _grouping_model_schema = json.loads(
     "url" : "https://docs.waylay.io/#/api/broker/?id=grouping"
   },
   "anyOf" : [ {
-    "$ref" : "#/components/schemas/Grouping_anyOf"
+    "$ref" : "#/components/schemas/GroupingAuto"
   }, {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {
-    "$ref" : "#/components/schemas/SO8601Duration"
+    "$ref" : "#/components/schemas/ISO8601Duration"
   } ]
 }
 """,
@@ -241,16 +141,16 @@ _grouping_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"Grouping": _grouping_model_schema})
 
-_grouping_any_of_model_schema = json.loads(
+_grouping_auto_model_schema = json.loads(
     r"""{
-  "title" : "Grouping_anyOf",
+  "title" : "GroupingAuto",
   "type" : "string",
   "enum" : [ "auto" ]
 }
 """,
     object_hook=with_example_provider,
 )
-MODEL_DEFINITIONS.update({"Grouping_anyOf": _grouping_any_of_model_schema})
+MODEL_DEFINITIONS.update({"GroupingAuto": _grouping_auto_model_schema})
 
 _hal_link_model_schema = json.loads(
     r"""{
@@ -300,6 +200,24 @@ _latest_measurement_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"LatestMeasurement": _latest_measurement_model_schema})
 
+_latest_value_model_schema = json.loads(
+    r"""{
+  "required" : [ "timestamp" ],
+  "type" : "object",
+  "properties" : {
+    "timestamp" : {
+      "$ref" : "#/components/schemas/UnixEpochMillis"
+    },
+    "value" : {
+      "$ref" : "#/components/schemas/ScalarData"
+    }
+  }
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"LatestValue": _latest_value_model_schema})
+
 _measurements_model_schema = json.loads(
     r"""{
   "title" : "Measurements",
@@ -307,7 +225,7 @@ _measurements_model_schema = json.loads(
   "oneOf" : [ {
     "$ref" : "#/components/schemas/ScalarData"
   }, {
-    "$ref" : "#/components/schemas/Object_Data"
+    "$ref" : "#/components/schemas/ObjectData"
   } ]
 }
 """,
@@ -356,7 +274,7 @@ _message_query_from_model_schema = json.loads(
   "anyOf" : [ {
     "$ref" : "#/components/schemas/UnixEpochMillis"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -374,7 +292,7 @@ _message_query_result_model_schema = json.loads(
     "results" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/MessageQueryResult_results_inner"
+        "$ref" : "#/components/schemas/MessageQueryResultItem"
       }
     }
   }
@@ -384,9 +302,9 @@ _message_query_result_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"MessageQueryResult": _message_query_result_model_schema})
 
-_message_query_result_results_inner_model_schema = json.loads(
+_message_query_result_item_model_schema = json.loads(
     r"""{
-  "title" : "MessageQueryResult_results_inner",
+  "title" : "MessageQueryResultItem",
   "type" : "object",
   "properties" : {
     "resource" : {
@@ -405,7 +323,7 @@ _message_query_result_results_inner_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({
-    "MessageQueryResult_results_inner": _message_query_result_results_inner_model_schema
+    "MessageQueryResultItem": _message_query_result_item_model_schema
 })
 
 _message_query_until_model_schema = json.loads(
@@ -415,7 +333,7 @@ _message_query_until_model_schema = json.loads(
   "anyOf" : [ {
     "$ref" : "#/components/schemas/UnixEpochMillis"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -430,7 +348,7 @@ _message_query_window_model_schema = json.loads(
   "anyOf" : [ {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -438,26 +356,47 @@ _message_query_window_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"MessageQuery_window": _message_query_window_model_schema})
 
-_multiple_series_query_request_inner_model_schema = json.loads(
+_message_success_result_model_schema = json.loads(
     r"""{
-  "title" : "MultipleSeriesQueryRequest_inner",
-  "oneOf" : [ {
-    "$ref" : "#/components/schemas/SeriesQueryRequest"
-  }, {
-    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
-  } ]
+  "required" : [ "message" ],
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string"
+    }
+  }
 }
 """,
     object_hook=with_example_provider,
 )
-MODEL_DEFINITIONS.update({
-    "MultipleSeriesQueryRequest_inner": _multiple_series_query_request_inner_model_schema
-})
+MODEL_DEFINITIONS.update({"MessageSuccessResult": _message_success_result_model_schema})
+
+_metric_summary_model_schema = json.loads(
+    r"""{
+  "required" : [ "name" ],
+  "type" : "object",
+  "properties" : {
+    "name" : {
+      "$ref" : "#/components/schemas/MetricId"
+    },
+    "latest" : {
+      "$ref" : "#/components/schemas/LatestValue"
+    }
+  }
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"MetricSummary": _metric_summary_model_schema})
 
 _object_data_model_schema = json.loads(
     r"""{
-  "title" : "Object Data",
+  "title" : "ObjectData",
   "description" : "Event data stored only in the _Message Cache_.",
+  "example" : {
+    "timestamp" : 1729869037000,
+    "temperature" : 23
+  },
   "oneOf" : [ {
     "title" : "Object",
     "type" : "object"
@@ -472,7 +411,7 @@ _object_data_model_schema = json.loads(
 """,
     object_hook=with_example_provider,
 )
-MODEL_DEFINITIONS.update({"Object_Data": _object_data_model_schema})
+MODEL_DEFINITIONS.update({"ObjectData": _object_data_model_schema})
 
 _order_model_schema = json.loads(
     r"""{
@@ -539,7 +478,7 @@ _publish_event_response_content_model_schema = json.loads(
   }, {
     "$ref" : "#/components/schemas/TimestampedResourceEvents"
   }, {
-    "$ref" : "#/components/schemas/PublishEventResponse_content_anyOf"
+    "$ref" : "#/components/schemas/PublishEventResponse[object Object]"
   } ]
 }
 """,
@@ -549,7 +488,7 @@ MODEL_DEFINITIONS.update({
     "PublishEventResponse_content": _publish_event_response_content_model_schema
 })
 
-_publish_event_response_content_any_of_model_schema = json.loads(
+_publish_event_response_object_object_model_schema = json.loads(
     r"""{
   "type" : "object",
   "description" : "Marks that multiple events where published",
@@ -559,7 +498,7 @@ _publish_event_response_content_any_of_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({
-    "PublishEventResponse_content_anyOf": _publish_event_response_content_any_of_model_schema
+    "PublishEventResponse[object Object]": _publish_event_response_object_object_model_schema
 })
 
 _publish_resource_event_response_model_schema = json.loads(
@@ -587,7 +526,7 @@ _publish_resource_event_response_content_model_schema = json.loads(
   "anyOf" : [ {
     "$ref" : "#/components/schemas/TimestampedEvent"
   }, {
-    "$ref" : "#/components/schemas/PublishEventResponse_content_anyOf"
+    "$ref" : "#/components/schemas/PublishResourceEventResponse[object Object]"
   } ]
 }
 """,
@@ -597,19 +536,17 @@ MODEL_DEFINITIONS.update({
     "PublishResourceEventResponse_content": _publish_resource_event_response_content_model_schema
 })
 
-_query_time_series_200_response_model_schema = json.loads(
+_publish_resource_event_response_object_object_model_schema = json.loads(
     r"""{
-  "oneOf" : [ {
-    "$ref" : "#/components/schemas/TimeseriesJsonResult"
-  }, {
-    "$ref" : "#/components/schemas/MultipleTimeseriesJsonResult"
-  } ]
+  "type" : "object",
+  "description" : "Marks that multiple events where published",
+  "enum" : [ { } ]
 }
 """,
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({
-    "queryTimeSeries_200_response": _query_time_series_200_response_model_schema
+    "PublishResourceEventResponse[object Object]": _publish_resource_event_response_object_object_model_schema
 })
 
 _query_time_series_request_model_schema = json.loads(
@@ -629,6 +566,47 @@ MODEL_DEFINITIONS.update({
     "queryTimeSeries_request": _query_time_series_request_model_schema
 })
 
+_raw_datapoints_links_model_schema = json.loads(
+    r"""{
+  "type" : "object",
+  "properties" : {
+    "next" : {
+      "$ref" : "#/components/schemas/HalLink"
+    }
+  }
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"RawDatapointsLinks": _raw_datapoints_links_model_schema})
+
+_raw_datapoints_response_model_schema = json.loads(
+    r"""{
+  "required" : [ "query", "series" ],
+  "type" : "object",
+  "properties" : {
+    "_links" : {
+      "$ref" : "#/components/schemas/RawDatapointsLinks"
+    },
+    "query" : {
+      "$ref" : "#/components/schemas/SeriesQueryResponse"
+    },
+    "series" : {
+      "type" : "array",
+      "description" : "Array of timestamp-value tuples",
+      "items" : {
+        "$ref" : "#/components/schemas/SeriesKeyValue"
+      }
+    }
+  }
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({
+    "RawDatapointsResponse": _raw_datapoints_response_model_schema
+})
+
 _resource_event_model_schema = json.loads(
     r"""{
   "required" : [ "resource" ],
@@ -644,7 +622,11 @@ _resource_event_model_schema = json.loads(
   "additionalProperties" : {
     "$ref" : "#/components/schemas/Measurements"
   },
-  "description" : "Measurement object with resource identifier and optional timestamp."
+  "description" : "Measurement object with resource identifier and optional timestamp.",
+  "example" : {
+    "resource" : "resource-1",
+    "temperature" : 23.5
+  }
 }
 """,
     object_hook=with_example_provider,
@@ -672,20 +654,18 @@ _scalar_data_model_schema = json.loads(
 )
 MODEL_DEFINITIONS.update({"ScalarData": _scalar_data_model_schema})
 
-_series_key_value_inner_model_schema = json.loads(
+_series_query_item_model_schema = json.loads(
     r"""{
-  "title" : "SeriesKeyValue_inner",
-  "nullable" : true,
   "oneOf" : [ {
-    "$ref" : "#/components/schemas/UnixEpochMillis"
+    "$ref" : "#/components/schemas/SeriesQueryRequest"
   }, {
-    "$ref" : "#/components/schemas/ScalarData"
+    "$ref" : "#/components/schemas/SeriesQueryWithoutAggregatesRequest"
   } ]
 }
 """,
     object_hook=with_example_provider,
 )
-MODEL_DEFINITIONS.update({"SeriesKeyValue_inner": _series_key_value_inner_model_schema})
+MODEL_DEFINITIONS.update({"SeriesQueryItem": _series_query_item_model_schema})
 
 _series_query_request_model_schema = json.loads(
     r"""{
@@ -747,7 +727,7 @@ _series_query_request_from_model_schema = json.loads(
   "oneOf" : [ {
     "$ref" : "#/components/schemas/UnixEpochMillis"
   }, {
-    "$ref" : "#/components/schemas/SO8601Timestamp"
+    "$ref" : "#/components/schemas/ISO8601Timestamp"
   } ]
 }
 """,
@@ -763,7 +743,7 @@ _series_query_request_window_model_schema = json.loads(
   "oneOf" : [ {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {
-    "$ref" : "#/components/schemas/SO8601Duration"
+    "$ref" : "#/components/schemas/ISO8601Duration"
   } ]
 }
 """,
@@ -869,6 +849,21 @@ MODEL_DEFINITIONS.update({
     "SeriesQueryWithoutAggregatesRequest": _series_query_without_aggregates_request_model_schema
 })
 
+_series_value_model_schema = json.loads(
+    r"""{
+  "title" : "SeriesValue",
+  "nullable" : true,
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/UnixEpochMillis"
+  }, {
+    "$ref" : "#/components/schemas/ScalarData"
+  } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({"SeriesValue": _series_value_model_schema})
+
 _ttl_duration_model_schema = json.loads(
     r"""{
   "description" : "Specifies the duration of a TTL interval.",
@@ -877,7 +872,7 @@ _ttl_duration_model_schema = json.loads(
   }, {
     "$ref" : "#/components/schemas/DurationWithUnit"
   }, {
-    "$ref" : "#/components/schemas/SO8601Duration"
+    "$ref" : "#/components/schemas/ISO8601Duration"
   } ]
 }
 """,
@@ -1019,6 +1014,21 @@ _timeseries_json_result_model_schema = json.loads(
     object_hook=with_example_provider,
 )
 MODEL_DEFINITIONS.update({"TimeseriesJsonResult": _timeseries_json_result_model_schema})
+
+_timeseries_query_response_model_schema = json.loads(
+    r"""{
+  "oneOf" : [ {
+    "$ref" : "#/components/schemas/TimeseriesJsonResult"
+  }, {
+    "$ref" : "#/components/schemas/MultipleTimeseriesJsonResult"
+  } ]
+}
+""",
+    object_hook=with_example_provider,
+)
+MODEL_DEFINITIONS.update({
+    "TimeseriesQueryResponse": _timeseries_query_response_model_schema
+})
 
 _timestamped_event_model_schema = json.loads(
     r"""{

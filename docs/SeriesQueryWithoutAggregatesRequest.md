@@ -1,6 +1,11 @@
 # SeriesQueryWithoutAggregatesRequest
 
 
+**Source:** `waylay.services.data.models.series_query_without_aggregates_request`
+
+
+
+
 ## Properties
 
 Name | Type | Description | Notes
@@ -16,23 +21,40 @@ Name | Type | Description | Notes
 **order** | [**Order**](Order.md) |  | [optional] [default to Order.ASCENDING]
 **return_ingestion_timestamp** | **bool** |  | [optional] [default to False]
 
+
 ## Example
 
 ```python
-from waylay.services.data.models.series_query_without_aggregates_request import SeriesQueryWithoutAggregatesRequest
+from waylay.services.data.models.series_query_without_aggregates_request import (
+    SeriesQueryWithoutAggregatesRequest,
+)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SeriesQueryWithoutAggregatesRequest from a JSON string
-series_query_without_aggregates_request_instance = SeriesQueryWithoutAggregatesRequest.from_json(json)
-# print the JSON string representation of the object
-print SeriesQueryWithoutAggregatesRequest.to_json()
+series_query_without_aggregates_request = SeriesQueryWithoutAggregatesRequest(
+    var_from=...,
+    until=...,
+    window=...,
+    metric=...,
+    aggregates=...,
+    resources=...,
+    max_results=...,
+    filter=...,
+    order=...,
+    return_ingestion_timestamp=...,
+)
 
-# convert the object into a dict
-series_query_without_aggregates_request_dict = series_query_without_aggregates_request_instance.to_dict()
-# create an instance of SeriesQueryWithoutAggregatesRequest from a dict
-series_query_without_aggregates_request_form_dict = series_query_without_aggregates_request.from_dict(series_query_without_aggregates_request_dict)
+# Create from JSON
+series_query_without_aggregates_request = SeriesQueryWithoutAggregatesRequest.from_json(
+    '{ "from": ..., "until": ..., "window": ..., "metric": ..., "aggregates": ..., "resources": ..., "maxResults": ..., "filter": ..., "order": ..., "returnIngestionTimestamp": ... }'
+)
+
+# Export to dictionary
+series_query_without_aggregates_request_dict = (
+    series_query_without_aggregates_request.to_dict()
+)
 ```
+
+
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
