@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waylay-sdk-data-types"
-version = "2.18.0rc20260304"
+version = "2.18.0.20260305"
 description = "Waylay Broker Types "
 authors = [
     { name = "Waylay", email = "info@waylay.io"}
@@ -13,7 +13,7 @@ keywords = ["Waylay Broker" , "Types"]
 requires-python = ">= 3.10"
 dependencies = [
     "waylay-sdk-core ~= 1.0",
-    "waylay-sdk-data == 2.18.0rc20260304",
+    "waylay-sdk-data == 2.18.0.20260305",
 ]
 readme = "README.md"
 license={file = "LICENSE.txt"}
